@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intro to CSS</title>
+    <style>
+        p{
+            background-color:green;
+        }
+        .yellowBg {
+            background-color:yellow;
+        }
+        #intro {
+            background-color: grey;
+        }
+
+        h1{
+            color:red;
+        }
+
+        h1{
+            color:green  !important;
+        }
+
+        h1 {
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Intro to CSS</h1>
+
+    <p style="color:red; background-color:blue">
+        Inline styles have highest prcedence
+    </p>
+
+    <p class="yellowBg">
+        Separate paragraph to show element styling
+    </p>
+
+    <p class="yellowBg">
+        Another paragraph with same class
+    </p>
+
+    <p>
+        Paragraph with no ID or class
+    </p>
+
+    <p id="intro" class="yellowBg">
+        Id is more specific than class. The one has more specific wins
+    </p>
+</body>
+</html>

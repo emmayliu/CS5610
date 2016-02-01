@@ -1,0 +1,22 @@
+p{
+    background-color:green;
+}
+.yellowBg {
+    background-color:yellow;
+}
+#intro {
+    background-color: grey;
+}
+
+
+h1{
+    color:red;
+}
+
+h1{
+    color:green  !important;
+}
+
+h1 {
+    color:blue;
+}
