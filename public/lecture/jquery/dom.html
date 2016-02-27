@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manipulationg the DOM with jQuery</title>
+    <script src = "https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <style>
+        h1 {background-color: red;}
+        h2 {background-color: #1b6d85}
+    </style>
+    <script>
+        $(init);
+
+        function init()
+        {
+            $("h1").html("Changing HTML with jQuery");
+
+            $("body").append("<h2>Appeding content with jquery");
+
+            var ul = $("<ul>");
+            for(var i = 0; i < 10; i++)
+            {
+                var li = $("<li>");
+                li.append("Line Item" + i);
+                ul.append(li);
+            }
+            $("body").append(ul);
+
+            $("p")
+                    .css("color", "green")
+                    .css("background-color", "red");
+
+            $("#p2")
+                    .css({"color" : "white", "background-color" : "blue"})
+
+
+        }
+    </script>
+</head>
+<body>
+<h1>Manipulationg the DOM with jQuery</h1>
+
+<p>
+    This is a paragraph;
+</p>
+
+<p id = "p2">
+    Hey this is p2;
+
+</p>
+
+</body>
+</html>
