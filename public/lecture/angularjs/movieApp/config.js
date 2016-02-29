@@ -3,27 +3,40 @@
  */
 (function(){
     angular
-        .module("MovieApp")
+        .module("FormBuilderApp")
         .config(configuration);
 
     function configuration($routeProvider) {
         $routeProvider
             .when("/home", {
-                templateUrl: "home/home.view.html"
+                templateUrl: "views/home/home.view.html"
             })
-            .when("/search", {
-                templateUrl: "search/search.view.html",
-                controller: "SearchController"
-        })
-            .when("/search/:title", {
-                templateUrl: "search/search.view.html",
-                controller: "SearchController"
+            .when("/login", {
+                templateUrl: "views/users/login.view.html",
+                controller: "LoginController"
+            })
+            .when("/profile", {
+                templateUrl: "views/users/profile.view.html",
+                controller: "ProfileController"
+            })
+            .when("/register", {
+                templateUrl: "views/users/register.view.html",
+                controller: "RegisterController"
             })
 
-            .when("/detail/:imdbID", {
-                templateUrl: "search/detail.view.html",
-                controller: "DetailController"
+            .when("/admin", {
+                templateUrl: "views/admin/admin.view.html",
+                controller: "AdminController"
             })
+            .when("/forms", {
+                templateUrl: "views/forms/forms.view.html",
+                controller: "FormsController"
+            })
+            .when("/fields", {
+                templateUrl: "views/forms/fields.view.html",
+                controller: "fieldsController"
+            })
+
             .otherwise({
                 redirectTo: "/home"
 
