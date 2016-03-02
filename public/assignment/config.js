@@ -1,9 +1,10 @@
 /**
  * Created by emma on 2/27/16.
  */
+"use strict";
 (function(){
     angular
-        .module("FormBuiderApp")
+        .module("FormBuilderApp", ["ngRoute"])
         .config(configuration);
 
     function configuration($routeProvider) {
@@ -11,24 +12,40 @@
             .when("/home", {
                 templateUrl: "views/home/home.view.html"
             })
-            .when("/", {
-                templateUrl: "search/search.view.html",
-                controller: "SearchController"
+            .when("/register", {
+                templateUrl: "views/users/register.view.html",
+                controller: "RegisterController"
             })
-            .when("/search/:title", {
-                templateUrl: "search/search.view.html",
-                controller: "SearchController"
+            .when("/login", {
+                templateUrl: "views/users/login.view.html",
+                controller: "LoginController"
             })
 
-            .when("/detail/:imdbID", {
-                templateUrl: "search/detail.view.html",
-                controller: "DetailController"
+            .when("/profile", {
+                templateUrl: "views/users/profile.view.html",
+                controller: "ProfileController"
             })
+
+            .when("/forms", {
+                templateUrl: "views/forms/forms.view.html",
+                controller: "FormController"
+            })
+
+            .when("/admin", {
+                templateUrl: "views/admin/admin.view.html",
+            })
+
+            .when("/fields", {
+                templateUrl: "views/forms/fields.view.html",
+            })
+
+
+
             .otherwise({
                 redirectTo: "/home"
 
-            });
+            })
 
     }
 
-})()
+})();
