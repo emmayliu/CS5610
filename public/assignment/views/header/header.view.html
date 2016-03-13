@@ -26,7 +26,7 @@
                     <a href="#/profile">{{user.username}}</a></li>
 
 
-                <li ng-show="user && user.roles.indexOf('admin') != -1"
+                <li ng-show="user.roles.indexOf('admin') >=0"
                     ng-class="{'active': $location.url() == '/admin'}">
                     <a href ="#/admin">Admin</a></li>
             </ul>

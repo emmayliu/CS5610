@@ -8,6 +8,12 @@
         .controller("FormController", formController);
 
     function formController($scope, $location, $rootScope, FormService) {
+
+        // if there is no current user, back to home
+        if (!$scope.user) {
+            $location.url("/home");
+        }
+
         $scope.$location = $location;
 
 
