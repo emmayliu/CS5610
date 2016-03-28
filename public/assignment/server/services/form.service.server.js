@@ -1,42 +1,39 @@
 /**
  * Created by emma on 3/13/16.
  */
-module.exports = function(app, formModel) {
+module.exports = function (app, formModel) {
+    app.get("/api/assignment/user/:userId/form", findFormsForUser);
+    app.get("/api/assignment/form/:formId", findFormById);
+    app.delete("/api/assignment/form/:formId", deleteForm);
+    app.post("/api/assignment/user/:userId/form", addFormForUser);
+    app.put("/api/assignment/form/:formId", updateForm);
 
-    app.get("/api/assignment/user/:userId/form", getFormsByUserId);
-    app.get("/api/assignment/form/:formId", getFormById);
-    app.delete("/api/assignment/form/:formId", deleteFormById);
-    app.post("/api/assignment/user/:userId/form", createForm);
-    app.put("/api/assignment/form/:formId", updateFormById);
-
-
-
-    function getFormsByUserId (req, res) {
+    function findFormsForUser(req, res) {
         var userId = req.params.userId;
         res.json(formModel.findFormsByUserId(userId));
     }
 
-    function getFormById (req, res) {
-        var id = req.params.id;
-        res.json(formModel.findFormById(id));
+    function findFormById(req, res) {
+        var formId = req.params.formId;
+        res.json(formModel.findFormByID(formId));
     }
 
-    function deleteFormById (req, res) {
-        var id = req.params.id;
-        res.json(formModel.deleteFormById(id));
+    function deleteForm(req, res) {
+        var formId = req.params.formId;
+        res.json(formModel.deleteForm(formId));
     }
 
-    function createForm (req, res) {
+    function addFormForUser(req, res) {
         var userId = req.params.userId;
         var form = req.body;
         form.userId = userId;
-        res.json(formModel.createForm(form));
+
+        res.json(formModel.createForm(userId,form));
     }
 
-    function updateFormById (req, res) {
-        var id = req.params.id;
+    function updateForm(req, res) {
+        var formId = req.params.formId;
         var form = req.body;
-        res.json(formModel.updateForm(id, form));
+        res.json(formModel.updateForm(formId, form));
     }
-
 };

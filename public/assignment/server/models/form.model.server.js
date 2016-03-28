@@ -3,7 +3,7 @@
  */
 
 var mock = require("./form.mock.json");
-var uuid = require('uuid');
+var uuid = require('node-uuid');
 
 
 module.exports = function() {
@@ -20,6 +20,7 @@ module.exports = function() {
         findFormsByUserId: findFormsByUserId,
         findAllFields: findAllFields,
         findFieldByIds: findFieldByIds,
+        findIndexById: findIndexById,
         deleteField: deleteField,
         createField: createField,
         updateField: updateField
@@ -28,10 +29,11 @@ module.exports = function() {
 
     // Implementations of function listed in api
 
-    function createForm(form) {
-        form._id = uuid.v1();
+    function createForm(userId, form) {
+        form._id  = uuid.v1();
+        form.userId = userId;
         mock.push(form);
-        return mock;
+        return form;
     }
 
     function findAllForms() {
@@ -49,9 +51,12 @@ module.exports = function() {
 
 
     function updateForm(id, form) {
-        var index = mock.indexOf(findFormById(id));
-        mock[index].title = form.title;
-        mock[index].fields = form.fields;
+        var index = findIndexById(mock, id)
+        if(index != -1) {
+            for(var f in form) {
+                mock[index][f] = form[f];
+            }
+        }
 
         return mock;
     }
@@ -75,13 +80,22 @@ module.exports = function() {
     }
 
     function findFormsByUserId(userId) {
-        var forms = {};
+        var userForms = [];
         for(var f in mock) {
             if(mock[f].userId === userId) {
-                forms.push(mock[f]);
+                userForms.push(mock[f]);
             }
         }
-        return forms;
+        return userForms;
+    }
+
+    function findIndexById(array, id) {
+         for (var a in array) {
+             if(array[a]._id === id){
+                 return a;
+             }
+         }
+        return -1;
     }
 
     function findAllFields(formId) {
@@ -113,7 +127,7 @@ module.exports = function() {
 
     function createField (formId, field) {
         var form = findFormById(formId);
-        field._id = uuid.vi();
+        field._id = uuid.v1();
         form.fields.push(field);
         return form.fields;
     }

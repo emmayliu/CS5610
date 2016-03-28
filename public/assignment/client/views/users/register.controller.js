@@ -42,6 +42,7 @@
                         for(var u in users){
                             if(users[u].username === user.username) {
                                 UserService.setCurrentUser(users[u]);
+                                console.log(user);
                                 $location.url("/profile");
                                 break;
                             }

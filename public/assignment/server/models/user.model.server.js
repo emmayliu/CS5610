@@ -48,14 +48,16 @@ module.exports = function () {
     }
 
     function updateUser(id, user) {
-        var i = findIndexById(id);
-        if (i > -1) {
-            for (var p in user) {
-                mock[i][p] = user[p];
-            }
-            //return mock[u];
+        var index = findIndexById(id);
+        console.log("updating");
+        if(index != -1) {
+            mock[index].username = user.username;
+            mock[index].password = user.password;
+            mock[index].firstName = user.firstName;
+            mock[index].lastName = user.lastName;
+            return mock;
         }
-        return mock;
+
     }
 
     function deleteUser(id) {
@@ -68,8 +70,8 @@ module.exports = function () {
 
     function findIndexById(id) {
         for (var u in mock) {
-            if (mock[u]._id == id) {
-                return i;
+            if (mock[u]._id === id) {
+                return u;
             }
         }
         return -1;

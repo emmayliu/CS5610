@@ -20,17 +20,16 @@
         vm.update = update;
 
         function update(user) {
+            console.log("updating in function update");
             if (!user.password || !user.verifyPassword) {
                 vm.message = "Password is required.";
-                return;
             }
             if (user.verifyPassword != user.password) {
                 vm.message = "Passwords don't match.";
-                return;
+
             }
             if (!user.email) {
-                vm.message = "Email is required.";
-                return;
+                vm.message = "Please enter your email.";
             }
             UserService
                 .updateUser(vm.currentUser._id, user)

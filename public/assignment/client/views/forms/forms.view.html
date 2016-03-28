@@ -1,57 +1,61 @@
 <div ng-controller="FormController">
-    <h1 class="page-header">Forms</h1>
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#/forms">Forms</a></li>
-        <li><a href="#/fields">Fields</a></li>
-    </ul>
+<h1 class="page-header">Forms</h1>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#/forms">Forms</a></li>
+    <li><a href="#/form/:formId/fields">Fields</a></li>
+</ul>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Form Name
-                </th>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Form Name
+            </th>
 
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Action
-                </th>
-            </tr>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Action
+            </th>
+        </tr>
 
-            <tr>
-                <th>
-                    <input ng-model="form.title" id="form_title" type="text" name="form_title" placeholder="title">
-                </th>
+        <tr>
+            <th>
+                <input ng-model="model.newForm.title" id="form_title" type="text" name="form_title" placeholder="title">
+            </th>
 
-                <th>
-                    <a ng-click="addForm()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus">
+            <th>
+                <a ng-click="model.addForm(model.newForm)" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus">
                     </span></a>
 
-                    <a ng-click="updateForm()" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok">
+                <a ng-click="model.updateForm()" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok">
                     </span></a>
-                </th>
-            </tr>
-            </thead>
+            </th>
+        </tr>
+        </thead>
 
-            <tbody>
-            <tr ng-repeat="form in forms" class="ng-scope">
-                <td>{{form.title}}</td>
-                <td>
-                    <a ng-click="deleteForm($index)" class="btn btn-danger btn-sm">
+        <tbody>
+        <tr ng-repeat="form in model.forms track by form._id" class="ng-scope">
+            <td>{{form.title}}</td>
+            <td>
+                <a ng-click="model.deleteForm($index)" class="btn btn-danger btn-sm">
                     <span class="glyphicon glyphicon-remove"></span>
-                    </a>
+                </a>
 
-                    <a ng-click="selectForm($index)" class="btn btn-warning btn-sm">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                <a ng-click="model.selectForm($index)" class="btn btn-warning btn-sm">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+</div>
+
+
+
+
 
 
 

@@ -55,6 +55,7 @@
                 controller: "SidebarController"
             })
 
+
             .when("/404", {
                 templateUrl: "views/404.html"
             })
