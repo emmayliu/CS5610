@@ -21,13 +21,10 @@
 
         function update(user) {
             console.log("updating in function update");
-            if (!user.password || !user.verifyPassword) {
+            if (!user.password) {
                 vm.message = "Password is required.";
             }
-            if (user.verifyPassword != user.password) {
-                vm.message = "Passwords don't match.";
 
-            }
             if (!user.email) {
                 vm.message = "Please enter your email.";
             }
