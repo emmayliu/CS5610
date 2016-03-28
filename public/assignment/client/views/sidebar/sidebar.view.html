@@ -3,13 +3,13 @@
         <li ng-class="{'active' : $location.url().indexOf('home') >0}">
             <a href="#/home">Home</a></li>
 
-        <li ng-show="user" ng-class="{'active' : $location.url().indexOf('profile') > 0}">
+        <li ng-show="currentUser" ng-class="{'active' : $location.url().indexOf('profile') > 0}">
             <a href="#/profile">Profile</a></li>
 
-        <li ng-show="user" ng-class="{'active' : $location.url().indexOf('form') >0}">
+        <li ng-show="currentUser" ng-class="{'active' : $location.url().indexOf('form') >0}">
             <a href="#/forms">Forms</a></li>
 
-        <li ng-show="user && (user.roles.indexOf('admin') != -1)"
+        <li ng-show="currentUser && (currentUser.roles.indexOf('admin') != -1)"
             ng-class="{'active' : $location.url().indexOf('admin') != -1}">
             <a href="#/admin">Admin</a></li>
     </ul>

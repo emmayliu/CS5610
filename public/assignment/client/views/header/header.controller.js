@@ -2,18 +2,27 @@
  * Created by emma on 2/27/16.
  */
 "use strict";
-(function(){
+(function () {
     angular
         .module("FormBuilderApp")
-        .controller("HeaderController", HeaderController);
+        .controller("HeaderController", headerController);
 
-    function HeaderController($location, $scope, $rootScope) {
-        $scope.$location = $location;
-        $scope.logout = logout;
+    function headerController($scope, $location, UserService) {
+        function init() {
+            $scope.$location = $location;
+            $scope.logout = logout;
+            $scope.isAdmin = isAdmin;
+        }
+        init();
 
         function logout() {
-            $rootScope.user = null;
+            UserService.setCurrentUser(null);
             $location.url("/home");
+        }
+
+        function isAdmin() {
+            var user = UserService.getCurrentUser();
+            return (user != null && user.roles != null && user.roles.indexOf("admin") != -1);
         }
     }
 })();

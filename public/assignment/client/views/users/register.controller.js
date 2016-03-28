@@ -7,15 +7,51 @@
         .module("FormBuilderApp")
         .controller("RegisterController", registerController);
 
-    function registerController($rootScope, UserService, $location, $scope) {
-        $scope.location = $location;
-        $scope.register = register;
+    function registerController($location, UserService) {
+        var vm = this;
+        vm.message =null;
 
-        function register() {
-            UserService.createUser($scope.user, function (user) {
-                $rootScope.user = user;
-                $location.url("/profile");
-            })
+        vm.register = register;
+
+
+        function register(user)
+        {
+            if(!user){
+                vm.message = "enter valid information";
+            }
+
+            if(!user.username){
+                vm.message ="Please enter username";
+            }
+            if(!user.password || !user.verifyPassword)
+            {
+                vm.message = "Please enter passwords";
+            }
+
+            if(user.password != user.verifyPassword) {
+                vm.message = "Your passwords don't match";
+            }
+
+            if(!user.email){
+                vm.message = "Please enter a valid email";
+            }
+            UserService
+                .createUser(user)
+                .then(function (response) {
+                        var users = response.data;
+                        for(var u in users){
+                            if(users[u].username === user.username) {
+                                UserService.setCurrentUser(users[u]);
+                                $location.url("/profile");
+                                break;
+                            }
+                        }
+
+
+                });
+
+
+
         }
     }
 })();
