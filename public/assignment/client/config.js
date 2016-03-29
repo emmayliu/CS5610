@@ -39,7 +39,7 @@
                 templateUrl: "views/admin/admin.view.html"
             })
 
-            .when("/form/:formId/fields", {
+            .when("/field", {
                 templateUrl: "views/forms/fields.view.html",
                 controller: "FieldController",
                 controllerAs: "model"
@@ -58,6 +58,12 @@
 
             .when("/404", {
                 templateUrl: "views/404.html"
+            })
+
+            .when("/user/:userId/form/:formId/fields", {
+                templateUrl: "views/forms/fields.view.html",
+                controller: "FieldController",
+                controllerAs : "model"
             })
 
 

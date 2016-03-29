@@ -100,7 +100,7 @@ module.exports = function() {
 
     function findAllFields(formId) {
         var form = findFormById(formId);
-        if(form) {
+        if(form != null) {
             return form.fields;
         }
         return [];

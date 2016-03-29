@@ -20,27 +20,32 @@
                 vm.message = "enter valid information";
             }
 
-            if(!user.username){
+            else if(!user.username){
                 vm.message ="Please enter username";
             }
-            if(!user.password || !user.verifyPassword)
+            else if(!user.password || !user.verifyPassword)
             {
                 vm.message = "Please enter passwords";
+
             }
 
-            if(user.password != user.verifyPassword) {
+            else if(user.password != user.verifyPassword) {
                 vm.message = "Your passwords don't match";
+
             }
 
-            if(!user.email){
+            else if(!user.email){
                 vm.message = "Please enter a valid email";
             }
-            UserService
-                .createUser(user)
-                .then(function (response) {
+
+            else {
+
+                UserService
+                    .createUser(user)
+                    .then(function (response) {
                         var users = response.data;
-                        for(var u in users){
-                            if(users[u].username === user.username) {
+                        for (var u in users) {
+                            if (users[u].username === user.username) {
                                 UserService.setCurrentUser(users[u]);
                                 console.log(user);
                                 $location.url("/profile");
@@ -49,7 +54,8 @@
                         }
 
 
-                });
+                    });
+            }
 
 
 

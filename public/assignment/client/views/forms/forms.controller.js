@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .controller("FormController", formController);
 
-    function formController(UserService, FormService, $scope) {
+    function formController(UserService, FormService, $rootScope) {
         var vm = this;
         vm.error = null;
         vm.message = null;
@@ -14,6 +14,7 @@
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
+        vm.getFormId = getFormId;
         vm.newForm = {"title": ""};
         vm.forms = [];
         var currentUser = null;
@@ -25,11 +26,16 @@
                     .findAllFormsForUser(currentUser._id)
                     .then(function (response) {
                         vm.forms = response.data;
+                        console.log(vm.forms);
                     })
             }
         }
 
         init();
+
+        function getFormId(form) {
+            $rootScope.formId =form._id;
+        }
 
 
         function addForm(form) {

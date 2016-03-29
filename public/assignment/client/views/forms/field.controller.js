@@ -8,29 +8,35 @@
         .module("FormBuilderApp")
         .controller("FieldController", fieldController);
 
-    function fieldController($routeParams, FieldService) {
+    function fieldController($routeParams, FieldService, UserService, $rootScope) {
         var vm = this;
         vm.addField = addField;
         vm.updateField = updateField;
         vm.removeField = removeField;
         vm.displayOptions = displayOptions;
         vm.fieldType = null;
-        var formId = $routeParams.formId;
+        var formId = $rootScope.formId;
+        console.log(formId);
         var userId = $routeParams.userId;
+        console.log(userId);
         vm.fields = [];
+        var currentUser = null;
 
         function init() {
-            FieldService
-                .getFieldsForForm(formId)
-                .then(function (response) {
-                    var fields = response.data;
-                    if (fields != null) {
-                        vm.fields = fields;
-                    }
-                });
+            currentUser = UserService.getCurrentUser();
+            if(currentUser != null) {
+                FieldService
+                    .getFieldsForForm(formId)
+                    .then(function (response) {
+                        vm.fields = response.data;
+                        console.log(vm.fields);
+                    })
+            }
         }
 
+
         init();
+
 
         function displayOptions(options) {
             var res = "";

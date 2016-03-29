@@ -2,7 +2,7 @@
 <h1 class="page-header">Forms</h1>
 <ul class="nav nav-tabs">
     <li class="active"><a href="#/forms">Forms</a></li>
-    <li><a href="#/form/:formId/fields">Fields</a></li>
+    <li><a href="#/field">Fields</a></li>
 </ul>
 
 <div class="table-responsive">
@@ -36,8 +36,8 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="form in model.forms track by form._id" class="ng-scope">
-            <td>{{form.title}}</td>
+        <tr ng-repeat="form in model.forms" class="ng-scope">
+            <td><a href = "#/user/:userId/form/:formId/fields" ng-click = "model.getFormId(form)"> {{form.title}}</a></td>
             <td>
                 <a ng-click="model.deleteForm($index)" class="btn btn-danger btn-sm">
                     <span class="glyphicon glyphicon-remove"></span>
