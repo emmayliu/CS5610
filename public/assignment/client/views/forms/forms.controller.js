@@ -8,7 +8,6 @@
 
     function formController(UserService, FormService, $rootScope) {
         var vm = this;
-        vm.error = null;
         vm.message = null;
         vm.addForm = addForm;
         vm.updateForm = updateForm;

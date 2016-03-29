@@ -4,7 +4,9 @@
     "firstName": "Alice",
     "lastName": "Wonderland",
     "username": "alice",
-    "password": "alice"
+    "password": "alice",
+    "roles": "student",
+    "email": "alice@web.com"
   },
 
   {
@@ -12,7 +14,9 @@
     "firstName": "Bob",
     "lastName": "Hope",
     "username": "bob",
-    "password": "bob"
+    "password": "bob",
+    "roles": "admin",
+    "email": "bob@web.com"
   },
 
   {
@@ -20,7 +24,9 @@
     "firstName": "Charlie",
     "lastName": "Brown",
     "username": "charlie",
-    "password": "charlie"
+    "password": "charlie",
+    "roles": "student",
+    "email": "charlie@web.com"
   },
 
   {
@@ -28,7 +34,9 @@
     "firstName": "Dan",
     "lastName": "Craig",
     "username": "dan",
-    "password": "dan"
+    "password": "dan",
+    "roles": "faculty",
+    "email": "dan@web.com"
   },
 
   {
@@ -36,6 +44,9 @@
     "firstName": "Edward",
     "lastName": "Norton",
     "username": "ed",
-    "password": "ed"
+    "password": "ed",
+    "roles": "student",
+    "email": "edward@web.com"
+
   }
 ]
