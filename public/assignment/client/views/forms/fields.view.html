@@ -1,4 +1,3 @@
-
 <div ng-controller="FieldController">
     <h1 class="page-header">Forms : Registration Form</h1>
 
@@ -48,7 +47,7 @@
                                 <div class="checkbox">
                                     <div ng-repeat="option in field.options">
                                         <label>
-                                            <input type="checkbox" value="{{option.value}}">
+                                            <input type="checkbox" value="{{option.value}}">{{option.label}}
                                         </label>
                                     </div>
                                 </div>
@@ -60,7 +59,7 @@
                                 <label>{{field.label}}</label>
                                 <div>
                                     <select class="form-control">
-                                        <option ng-repeat="option in field.options">
+                                        <option ng-repeat="option in field.options" value={{option.value}}>
                                             {{option.label}}
                                         </option>
                                     </select>
@@ -74,7 +73,7 @@
                                 <div class="radio">
                                     <div ng-repeat="option in field.options">
                                         <label>
-                                            <input type="radio" value="{{option.value}}">
+                                            <input type="radio" value="{{option.value}}">{{option.label}}
                                         </label>
                                     </div>
                                 </div>
@@ -87,16 +86,17 @@
                         <!---icons---->
                         <div class="col-xs-4">
                             <br>
-                            <a class="btn btn-success btn-sm">
+                            <button ng-click="model.selectField($index)" type="button" class="btn btn-primary btn-sm"
+                               data-toggle="modal" data-target="#updateFieldModal">
                                 <scan class="glyphicon glyphicon-pencil"></scan>
-                            </a>
-                            <a class="btn btn-warning btn-sm">
+                            </button>
+                            <a ng-click="model.cloneField(field)" class="btn btn-success btn-sm">
                                 <scan class="glyphicon glyphicon-plus"></scan>
                             </a>
-                            <a class="btn btn-danger btn-sm">
+                            <a ng-click="model.deleteField($index)" class="btn btn-danger btn-sm">
                                 <scan class="glyphicon glyphicon-remove"></scan>
                             </a>
-                            <a class="btn btn-primary btn-sm">
+                            <a class="btn btn-info btn-sm">
                                 <scan class="glyphicon glyphicon-menu-hamburger"></scan>
                             </a>
                         </div>
@@ -106,22 +106,80 @@
                     </div>
 
 
+
+                    <!--- modal ------>
+                    <div class="modal fade" id="updateFieldModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">{{model.selectedField.label}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <label>Lable</label>
+                                    <input type="text" class="form-control" ng-model="model.selectedField.label">
+                                    <br>
+                                    <div ng-switch ="model.selectedField.type">
+                                        <div ng-switch-when="TEXT">
+                                            <label>Placeholder</label>
+                                            <input type="text" class="form-control"
+                                                   ng-model="model.selectedField.placeholder">
+                                        </div>
+
+                                        <div ng-switch-when="TEXTAREA">
+                                            <label>Placeholder</label>
+                                            <textarea class="form-control"
+                                                      ng-model="model.selectedField.label"></textarea>
+
+                                        </div>
+
+                                        <div ng-switch-when="DATE"></div>
+
+                                        <div ng-switch-when="OPTIONS">
+                                            <label>Options</label>
+                                            <textarea cols="50" rows="5" class="form-control" id="options">{{model
+                                                .displayOptions(model.selectedField.options)}}</textarea>
+                                        </div>
+
+                                        <div ng-switch-when="CHECKBOXES">
+                                            <label>Options</label>
+                                            <textarea cols="50" rows="5" class="form-control" id="checkboxes">{{model.displayOptions(model.selectedField.options)}}</textarea>
+                                        </div>
+
+                                        <div ng-switch-when="RADIOS">
+                                            <label>Options</label>
+                                            <textarea cols="50" rows="5" class="form-control" id="radios">{{model
+                                                .displayOptions(model.selectedField.options)}}</textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="col-xs-10" class="row">
                         <label for="addNewField">Add New Field</label>
-                        <select class="form-control" id="addNewField">
+                        <select ng-model="model.fieldType" class="form-control" id="addNewField">
                             <option></option>
-                            <option>Single Line Field</option>
-                            <option>Multiple Lines Field</option>
-                            <option>Date Field</option>
-                            <option>DropDown Field</option>
-                            <option>Checkbox Field</option>
-                            <option>Radio Button Field</option>
+                            <option value="text">Single Line Field</option>
+                            <option value="textarea">Multiple Lines Field</option>
+                            <option value="date">Date Field</option>
+                            <option value="dropdown">DropDown Field</option>
+                            <option value="checkbox">Checkbox Field</option>
+                            <option value="radio">Radio Button Field</option>
                         </select>
                     </div>
 
                     <div class="col-xs-2">
                         <br>
-                        <a class="btn btn-warning btn-sm">
+                        <a ng-click="model.addField(model.fieldType)" class="btn btn-primary btn-sm">
                             <scan class="glyphicon glyphicon-plus"></scan>
                         </a>
 

@@ -57,11 +57,6 @@
                 controller: "SidebarController"
             })
 
-
-            .when("/404", {
-                templateUrl: "views/404.html"
-            })
-
             .when("/user/:userId/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",
                 controller: "FieldController",

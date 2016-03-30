@@ -119,7 +119,7 @@ module.exports = function() {
         var form = findFormById(formId);
         for(var f in form.fields) {
             if(form.fields[f]._id === fieldId) {
-                form.fields(f, 1);
+                form.fields.splice(f, 1);
             }
         }
         return form.fields;

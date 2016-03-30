@@ -12,7 +12,9 @@
         var vm = this;
         vm.addField = addField;
         vm.updateField = updateField;
-        vm.removeField = removeField;
+        vm.deleteField = deleteField;
+        vm.selectField = selectField;
+        vm.cloneField = cloneField;
         vm.displayOptions = displayOptions;
         vm.fieldType = null;
         var formId = $rootScope.formId;
@@ -20,6 +22,8 @@
         var userId = $routeParams.userId;
         console.log(userId);
         vm.fields = [];
+        vm.fieldType = null;
+        vm.newField ={};
         var currentUser = null;
 
         function init() {
@@ -38,30 +42,22 @@
         init();
 
 
-        function displayOptions(options) {
-            var res = "";
-            var cop;
-            for (var op in options) {
-                cop = options[op];
-                res += cop.label + ":" + cop.value + "\n";
-            }
-            return res;
-        }
 
         function addField(fieldType) {
-            var newField = null;
+            console.log("adding field" +fieldType);
             switch (fieldType) {
-                case "TEXT":
-                    newField = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
+                case "text":
+                    vm.newField = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
                     break;
-                case "TEXTAREA":
-                    newField = {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"};
+                case "textarea":
+                    vm.newField = {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New" +
+                    " Field"};
                     break;
-                case "DATE":
-                    newField = {"_id": null, "label": "New Date Field", "type": "DATE"};
+                case "date":
+                    vm.newField = {"_id": null, "label": "New Date Field", "type": "DATE"};
                     break;
-                case "OPTIONS":
-                    newField = {
+                case "dropdown":
+                    vm.newField = {
                         "_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
                             {"label": "Option 1", "value": "OPTION_1"},
                             {"label": "Option 2", "value": "OPTION_2"},
@@ -69,8 +65,8 @@
                         ]
                     };
                     break;
-                case "CHECKBOXES":
-                    newField = {
+                case "checkbox":
+                    vm.newField = {
                         "_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": [
                             {"label": "Option A", "value": "OPTION_A"},
                             {"label": "Option B", "value": "OPTION_B"},
@@ -78,8 +74,8 @@
                         ]
                     };
                     break;
-                case "RADIOS":
-                    newField = {
+                case "radio":
+                    vm.newField = {
                         "_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": [
                             {"label": "Option X", "value": "OPTION_X"},
                             {"label": "Option Y", "value": "OPTION_Y"},
@@ -87,29 +83,50 @@
                         ]
                     };
                     break;
-                default:
-                    return;
+                default: return;
             }
-
-            if (newField != null) {
+                console.log("adding field by createFieldForForm");
                 FieldService
-                    .createFieldForForm(formId, newField)
-                    .then(function (response) {
-                        vm.fields = response.data;
-                    });
-            }
+                    .createFieldForForm(formId, vm.newField)
+                    .then(init);
 
         }
 
-        function updateField() {
+        function updateField(field) {
         }
 
-        function removeField(field) {
+
+        function cloneField(field) {
+            console.log("I am going to clone " +field.lable);
             FieldService
-                .deleteFieldFromForm(formId, field._id)
-                .then(function (response) {
-                    vm.fields = response.data;
-                });
+                .createFieldForForm(formId, field)
+                .then(init);
+
+        }
+
+        function displayOptions(options) {
+            var display = "";
+            var tmp;
+            for (var op in options) {
+                tmp = options[op];
+                display += tmp.label + ":" + tmp.value + "\n";
+            }
+            return display;
+        }
+
+
+        function deleteField(index) {
+            console.log("deleting field");
+            var fieldToDelete = vm.fields[index];
+            console.log(fieldToDelete._id);
+            FieldService
+                .deleteFieldFromForm(formId, fieldToDelete._id)
+                .then(init);
+        }
+
+        function selectField(index) {
+            vm.selectedField = vm.fields[index];
+            vm.newField.label = vm.selectedField.label;
         }
     }
 })();
