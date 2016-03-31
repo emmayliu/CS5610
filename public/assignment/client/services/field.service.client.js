@@ -36,8 +36,8 @@
             return $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 
-        function updateField(formId, fieldId, field) {
-            return $http.put("/api/assignment/form/" + formId + "/field/" + fieldId, field);
+        function updateField(formId, fieldId, newField) {
+            return $http.put("/api/assignment/form/" + formId + "/field/" + fieldId, newField);
         }
     }
 })();

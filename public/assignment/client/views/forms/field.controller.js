@@ -13,9 +13,8 @@
         vm.addField = addField;
         vm.updateField = updateField;
         vm.deleteField = deleteField;
-        vm.selectField = selectField;
         vm.cloneField = cloneField;
-        vm.displayOptions = displayOptions;
+        vm.editField = editField;
         vm.fieldType = null;
         var formId = $rootScope.formId;
         console.log(formId);
@@ -40,7 +39,6 @@
 
 
         init();
-
 
 
         function addField(fieldType) {
@@ -92,26 +90,47 @@
 
         }
 
-        function updateField(field) {
+        function editField (index) {
+            vm.selectedField = vm.fields[index];
+            vm.newField.label = vm.selectedField.label;
+            var optionArray = [];
+            for(var o in vm.selectedField.options) {
+                optionArray.push(vm.selectedField.options[o].label + ":" + vm.selectedField.options[o].value)
+            }
+            vm.selectedField.optionText = optionArray.join("\n");
+
         }
 
 
-        function cloneField(field) {
-            console.log("I am going to clone " +field.lable);
+
+        function updateField(field) {
+            console.log("updating field in client");
+            var optionArray = [];
+            if('options' in field) {
+                var text = field.optionText;
+                for(var o in text) {
+                    var opt = text[o].split(":");
+                    optionArray.push({
+                        label: opt[0],
+                        value: opt[1]
+                    });
+                }
+                field.options = optionArray;
+            }
+
             FieldService
-                .createFieldForForm(formId, field)
+                .updateField(formId, field._id, field)
                 .then(init);
 
         }
 
-        function displayOptions(options) {
-            var display = "";
-            var tmp;
-            for (var op in options) {
-                tmp = options[op];
-                display += tmp.label + ":" + tmp.value + "\n";
-            }
-            return display;
+
+        function cloneField(field) {
+            console.log("I am going to clone " +field.label);
+            FieldService
+                .createFieldForForm(formId, field)
+                .then(init);
+
         }
 
 
@@ -124,9 +143,9 @@
                 .then(init);
         }
 
-        function selectField(index) {
+        /* function selectField(index) {
             vm.selectedField = vm.fields[index];
             vm.newField.label = vm.selectedField.label;
-        }
+        }*/
     }
 })();

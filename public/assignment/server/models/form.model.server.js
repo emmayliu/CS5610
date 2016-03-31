@@ -132,7 +132,7 @@ module.exports = function() {
         return form.fields;
     }
 
-    function updateField (formId, field, fieldId) {
+    function updateField (formId, fieldId, field) {
         var form = findFormById(formId);
         var index = form.fields.indexOf(findFieldByIds(formId, fieldId));
         form.fields[index] = field;

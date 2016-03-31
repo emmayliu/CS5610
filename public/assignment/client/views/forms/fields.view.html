@@ -86,7 +86,7 @@
                         <!---icons---->
                         <div class="col-xs-4">
                             <br>
-                            <button ng-click="model.selectField($index)" type="button" class="btn btn-primary btn-sm"
+                            <button ng-click="model.editField($index)" type="button" class="btn btn-primary btn-sm"
                                data-toggle="modal" data-target="#updateFieldModal">
                                 <scan class="glyphicon glyphicon-pencil"></scan>
                             </button>
@@ -116,7 +116,7 @@
                                     <h4 class="modal-title">{{model.selectedField.label}}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <label>Lable</label>
+                                    <label>Label</label>
                                     <input type="text" class="form-control" ng-model="model.selectedField.label">
                                     <br>
                                     <div ng-switch ="model.selectedField.type">
@@ -129,7 +129,7 @@
                                         <div ng-switch-when="TEXTAREA">
                                             <label>Placeholder</label>
                                             <textarea class="form-control"
-                                                      ng-model="model.selectedField.label"></textarea>
+                                                      ng-model="model.selectedField.placeholder"></textarea>
 
                                         </div>
 
@@ -137,27 +137,34 @@
 
                                         <div ng-switch-when="OPTIONS">
                                             <label>Options</label>
-                                            <textarea cols="50" rows="5" class="form-control" id="options">{{model
-                                                .displayOptions(model.selectedField.options)}}</textarea>
+                                            <textarea ng-model="model.selectedField.optionText"
+                                                      class="form-control" cols="5" rows="10" ng-trim="false"
+                                                      ng-list="&#10" placeholder={{model.selectedField.optionText}}></textarea>
                                         </div>
 
                                         <div ng-switch-when="CHECKBOXES">
                                             <label>Options</label>
-                                            <textarea cols="50" rows="5" class="form-control" id="checkboxes">{{model.displayOptions(model.selectedField.options)}}</textarea>
+                                            <textarea ng-model="model.selectedField.optionText" class="form-control"
+                                                      cols="5" rows="10" ng-trim="false" ng-list="&#10"
+                                                      placeholder={{model.selectedField.optionText}}></textarea>
                                         </div>
 
                                         <div ng-switch-when="RADIOS">
                                             <label>Options</label>
-                                            <textarea cols="50" rows="5" class="form-control" id="radios">{{model
-                                                .displayOptions(model.selectedField.options)}}</textarea>
+                                            <textarea ng-model="model.selectedField.optionText" class="form-control"
+                                                      cols="5" rows="10" ng-trim="false" ng-list="&#10"
+                                                      placeholder={{model.selectedField.optionText}}></textarea>
                                         </div>
                                     </div>
 
                                 </div>
 
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button ng-click="model.updateField(model.selectedField)" type="button"
+                                            class="btn btn-primary">Save
+                                        changes</button>
                                 </div>
                             </div>
                         </div>
@@ -184,6 +191,8 @@
                         </a>
 
                     </div>
+
+
                 </div>
             </form>
         </div>
