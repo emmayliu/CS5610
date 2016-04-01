@@ -1,4 +1,11 @@
+<script>
+    $(function() {
+        $( "#sortable" ).sortable();
+    });
+</script>
+
 <div ng-controller="FieldController">
+
     <h1 class="page-header">Forms : Registration Form</h1>
 
     <ul class="nav nav-tabs">
@@ -6,7 +13,7 @@
         <li class="active"><a href="fields.view.html">Fields</a></li>
     </ul>
     <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body" >
             <form class="form form-responsive">
                 <div ng-model="fields" class="form-group">
                     <div  ng-switch="field.type" ng-repeat="field in model.fields" class="row">
@@ -14,8 +21,9 @@
 
                             <!---Single line Text --->
                             <div ng-switch-when="TEXT">
-                                <label>{{field.label}}</label>
-                                <input type="text" class="form-control" placeholder="{{field.placeholder}}">
+                                <label for="singleLine">{{field.label}}</label>
+                                <input type="text" class="form-control" placeholder="{{field.placeholder}}"
+                                       id="singleLine">
                                 <br>
                             </div>
 
@@ -138,22 +146,19 @@
                                         <div ng-switch-when="OPTIONS">
                                             <label>Options</label>
                                             <textarea ng-model="model.selectedField.optionText"
-                                                      class="form-control" cols="5" rows="10" ng-trim="false"
-                                                      ng-list="&#10" placeholder={{model.selectedField.optionText}}></textarea>
+                                                      class="form-control" cols="5" rows="10"></textarea>
                                         </div>
 
                                         <div ng-switch-when="CHECKBOXES">
                                             <label>Options</label>
                                             <textarea ng-model="model.selectedField.optionText" class="form-control"
-                                                      cols="5" rows="10" ng-trim="false" ng-list="&#10"
-                                                      placeholder={{model.selectedField.optionText}}></textarea>
+                                                      cols="5" rows="10"></textarea>
                                         </div>
 
                                         <div ng-switch-when="RADIOS">
                                             <label>Options</label>
                                             <textarea ng-model="model.selectedField.optionText" class="form-control"
-                                                      cols="5" rows="10" ng-trim="false" ng-list="&#10"
-                                                      placeholder={{model.selectedField.optionText}}></textarea>
+                                                      cols="5" rows="10"></textarea>
                                         </div>
                                     </div>
 
@@ -162,7 +167,8 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button ng-click="model.updateField(model.selectedField)" type="button"
+                                    <button ng-click="model.updateField(model.selectedField)" data-dismiss="modal"
+                                            type="button"
                                             class="btn btn-primary">Save
                                         changes</button>
                                 </div>

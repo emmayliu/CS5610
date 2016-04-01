@@ -108,14 +108,15 @@
             var optionArray = [];
             if('options' in field) {
                 var text = field.optionText;
-                for(var o in text) {
-                    var opt = text[o].split(":");
+                var text_array = text.split("\n");
+                for (var o in text_array) {
+                    var opt = text_array[o].split(":");
                     optionArray.push({
                         label: opt[0],
                         value: opt[1]
                     });
+                    field.options = optionArray;
                 }
-                field.options = optionArray;
             }
 
             FieldService
