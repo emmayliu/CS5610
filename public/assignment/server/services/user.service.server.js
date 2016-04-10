@@ -38,7 +38,15 @@ module.exports = function(app, userModel){
 
 
     function getAllUsers (req, res) {
-        res.json(userModel.findAllUsers());
+            userModel.findAllUsers()
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
     }
 
     function getUserById (req, res) {

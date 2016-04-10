@@ -47,16 +47,16 @@ module.exports = function (mongoose, db) {
         return deferred.promise;
     }
 
-
-    function findAllUsers() {
+    function findAllUsers(req, res){
         var deferred = q.defer();
-        UserModel.findById(userId, function (err, doc) {
+        UserModel.find({}, function (err, users) {
             if (err) {
                 deferred.reject(err);
             } else {
-                deferred.resolve(doc);
+                deferred.resolve(users);
             }
         });
+
         return deferred.promise;
     }
 
