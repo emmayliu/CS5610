@@ -18,7 +18,6 @@
                 if(!user) {
                     return;
                 }
-                console.log("login controller....");
                 UserService
                     .findUserByCredentials(
                          user.username,

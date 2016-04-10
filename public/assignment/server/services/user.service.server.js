@@ -2,7 +2,7 @@
  * Created by emma on 3/13/16.
  */
 
-var mock = require("../models/user.mock.json");
+
 
 module.exports = function(app, userModel){
     app.post("/api/assignment/user", createUser);
@@ -38,7 +38,6 @@ module.exports = function(app, userModel){
 
 
     function getAllUsers (req, res) {
-        console.log("after refactoring ----sending users to client....");
         res.json(userModel.findAllUsers());
     }
 
@@ -65,12 +64,15 @@ module.exports = function(app, userModel){
     }
 
     function getUserByCredential(req, res) {
-        console.log("user service server");
+        //console.log("user service server");
         var credentials = {};
         credentials.username = req.query.username;
         credentials.password = req.query.password;
-        var user = userModel.findUserByCredentials(credentials);
-        res.json(user);
+        userModel
+            .findUserByCredentials(credentials)
+            .then(function(user) {
+                res.json(user);
+            });
     }
 
     function updateUser (req, res) {

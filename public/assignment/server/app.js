@@ -2,10 +2,10 @@
  * Created by emma on 3/13/16.
  */
 
-module.exports = function(app) {
+module.exports = function(app, mongoose, db) {
 
-
-    var userModel = require("./models/user.model.server.js")();
+    // pass db and mongoose reference to model
+    var userModel = require("./models/user.model.server.js")(db, mongoose);
     var formModel   = require("./models/form.model.server.js")();
 
     var userService  = require("./services/user.service.server.js") (app, userModel);
