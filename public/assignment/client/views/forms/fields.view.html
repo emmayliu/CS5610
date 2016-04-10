@@ -4,6 +4,8 @@
     });
 </script>
 
+
+
 <div ng-controller="FieldController">
 
     <h1 class="page-header">Forms : Registration Form</h1>
@@ -45,7 +47,7 @@
                             <!----Date---->
                             <div ng-switch-when="DATE">
                                 <label>{{field.label}}</label>
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" placeholder="{{field.placeholder}}">
                                 <br>
                             </div>
 
@@ -177,27 +179,25 @@
                     </div>
 
 
-                    <div class="col-xs-10" class="row">
-                        <label for="addNewField">Add New Field</label>
-                        <select ng-model="model.fieldType" class="form-control" id="addNewField">
-                            <option></option>
-                            <option value="text">Single Line Field</option>
-                            <option value="textarea">Multiple Lines Field</option>
-                            <option value="date">Date Field</option>
-                            <option value="dropdown">DropDown Field</option>
-                            <option value="checkbox">Checkbox Field</option>
-                            <option value="radio">Radio Button Field</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="col-xs-10" class="row">
+                    <label for="addNewField">Add New Field</label>
+                    <select ng-model="model.fieldType" class="form-control" id="addNewField">
+                        <option></option>
+                        <option value="text">Single Line Field</option>
+                        <option value="textarea">Multiple Lines Field</option>
+                        <option value="date">Date Field</option>
+                        <option value="dropdown">DropDown Field</option>
+                        <option value="checkbox">Checkbox Field</option>
+                        <option value="radio">Radio Button Field</option>
+                    </select>
+                </div>
 
-                    <div class="col-xs-2">
-                        <br>
-                        <a ng-click="model.addField(model.fieldType)" class="btn btn-primary btn-sm">
-                            <scan class="glyphicon glyphicon-plus"></scan>
-                        </a>
-
-                    </div>
-
+                <div class="col-xs-2">
+                    <br>
+                    <a ng-click="model.addField(model.fieldType)" class="btn btn-primary btn-sm">
+                        <scan class="glyphicon glyphicon-plus"></scan>
+                    </a>
 
                 </div>
             </form>
