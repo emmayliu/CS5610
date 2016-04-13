@@ -20,7 +20,7 @@
 
         function init() {
             currentUser = UserService.getCurrentUser();
-            if(currentUser != null && currentUser.roles.indexOf('admin') >=0) {
+            if(currentUser != null && currentUser.roles.indexOf('admin') >= 0) {
                 UserService
                     .findAllUsers()
                     .then(function (response) {

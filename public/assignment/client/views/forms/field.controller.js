@@ -83,7 +83,7 @@
                     break;
                 default: return;
             }
-                console.log("adding field by createFieldForForm");
+               // console.log("adding field by createFieldForForm");
                 FieldService
                     .createFieldForForm(formId, vm.newField)
                     .then(init);
@@ -97,16 +97,22 @@
             for(var o in vm.selectedField.options) {
                 optionArray.push(vm.selectedField.options[o].label + ":" + vm.selectedField.options[o].value)
             }
-            vm.selectedField.optionText = optionArray.join("\n");
+            if(optionArray.length != 0) {
+                console.log("editField", vm.selectedField.optionText);
+                vm.selectedField.optionText = optionArray.join("\n");
+            }
+            else {
+                vm.selectedField.optionText = "";
+            }
 
         }
 
 
 
         function updateField(field) {
-            console.log("updating field in client");
+            //console.log("updating field in client");
             var optionArray = [];
-            if('options' in field) {
+            if('options' in field && field.optionText != "") {
                 var text = field.optionText;
                 var text_array = text.split("\n");
                 for (var o in text_array) {
