@@ -44,6 +44,7 @@
                     .createUser(user)
                     .then(function (response) {
                         var newUser = response.data;
+                        console.log("RETURNED USER", newUser);
                         UserService.setCurrentUser(newUser);
                         //console.log(user);
                         $location.url("/profile");

@@ -19,7 +19,12 @@ module.exports = function(app, userModel){
     function createUser (req, res) {
         var user = req.body;
         user.roles = ['student'];
-        res.json(userModel.createUser(user));
+        userModel
+            .createUser(user)
+            .then(function(new_user){
+                res.json(new_user);
+            });
+        //res.json(userModel.createUser(user));
     }
 
     function getUser(req, res) {
