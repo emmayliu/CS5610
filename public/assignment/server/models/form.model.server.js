@@ -22,12 +22,7 @@ module.exports = function(mongoose, db) {
         // specific service for form operation
         findFormByTitle: findFormByTitle,
         findFormsByUserId: findFormsByUserId,
-        findAllFields: findAllFields,
-        findFieldByIds: findFieldByIds,
-        findIndexById: findIndexById,
-        deleteField: deleteField,
-        createField: createField,
-        updateField: updateField
+
     };
     return api;
 
@@ -153,118 +148,7 @@ module.exports = function(mongoose, db) {
         return -1;
     }
 
-    function findAllFields(formId) {
-        var deferred = q.defer();
-        FormModel.findById(formId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                deferred.resolve(doc.fields);
-            }
-        });
-        return deferred.promise;
-    }
 
-    function findFieldByIds (formId, fieldId) {
-        var deferred = q.defer();
-        FormModel.findById(formId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-                var f;
-                for (f in doc.fields) {
-                    if (doc.fields[f] === fieldId) {
-                        deferred.resolve(doc.fields[f]);
-                    }
-                }
-            }
-        });
-        return deferred.promise;
-    }
-
-    function deleteField (formId, fieldId) {
-        var deferred = q.defer();
-
-        FormModel.findById(formId, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            } else {
-
-                var index = findIndexById(fieldId, doc.fields);
-                if (index > -1) {
-                    doc.fields.splice(index, 1);
-                }
-                doc.save(function (err, updatedForm) {
-
-                    if (err) {
-                        deferred.reject(err);
-                    } else {
-                        deferred.resolve(updatedForm.fields);
-
-                    }
-                });
-            }
-        });
-
-        return deferred.promise;
-    }
-
-
-    function createField (formId, field) {
-        var deferred = q.defer();
-
-        FormModel.findById(formId, function (err, doc) {
-
-            if (err) {
-                deferred.reject(err);
-            } else {
-
-                field._id = mongoose.Types.ObjectId();
-                doc.fields.push(field);
-
-                doc.save(function (err, updatedForm) {
-
-                    if (err) {
-                        deferred.reject(err);
-                    } else {
-                        deferred.resolve(updatedForm.fields);
-                    }
-                });
-            }
-        });
-
-        return deferred.promise;
-    }
-
-    function updateField (formId, fieldId, field) {
-        var deferred = q.defer();
-
-        FormModel.findById(formId, function (err, doc) {
-
-            if (err) {
-                deferred.reject(err);
-            } else {
-                var indField = findIndexById(fieldId, doc.fields);
-                if (indField > -1) {
-                    for (var p in field) {
-                        doc.fields[indField][p] = field[p];
-                    }
-                }
-
-                doc.save(function (err, updatedForm) {
-
-                    if (err) {
-                        deferred.reject(err);
-                    } else {
-                        deferred.resolve(updatedForm.fields);
-
-                    }
-                });
-            }
-        });
-
-        return deferred.promise;
-    }
 
 
 }

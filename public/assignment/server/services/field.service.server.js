@@ -4,7 +4,7 @@
 
 "use strict";
 
-module.exports = function (app, formModel) {
+module.exports = function (app, fieldModel) {
     app.get("/api/assignment/form/:formId/field", findFieldsForForm);
     app.get("/api/assignment/form/:formId/field/:fieldId", findFormFieldById);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFormField);
@@ -13,7 +13,7 @@ module.exports = function (app, formModel) {
 
     function findFieldsForForm(req, res) {
         var formId = req.params.formId;
-        formModel.findAllFields(formId)
+        fieldModel.findAllFields(formId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -27,7 +27,7 @@ module.exports = function (app, formModel) {
     function findFormFieldById(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        formModel.findFieldByIds(formId, fieldId)
+        fieldModel.findFieldByIds(formId, fieldId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -41,7 +41,7 @@ module.exports = function (app, formModel) {
     function deleteFormField(req, res) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        formModel.deleteField(formId, fieldId)
+        fieldModel.deleteField(formId, fieldId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -57,7 +57,7 @@ module.exports = function (app, formModel) {
     function addFieldForForm(req, res) {
         var formId = req.params.formId;
         var field = req.body;
-        formModel.createField(formId, field)
+        fieldModel.createField(formId, field)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -74,7 +74,7 @@ module.exports = function (app, formModel) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var field = req.body;
-        formModel.updateField(formId, fieldId, field)
+        fieldModel.updateField(formId, fieldId, field)
             .then(
                 function (doc) {
                     res.json(doc);
