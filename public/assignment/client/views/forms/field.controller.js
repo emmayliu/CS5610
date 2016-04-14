@@ -32,7 +32,7 @@
                     .getFieldsForForm(formId)
                     .then(function (response) {
                         vm.fields = response.data;
-                        console.log(vm.fields);
+                       // console.log(vm.fields);
                     })
             }
         }
@@ -42,7 +42,7 @@
 
 
         function addField(fieldType) {
-            console.log("adding field" +fieldType);
+            //console.log("adding field" +fieldType);
             switch (fieldType) {
                 case "text":
                     vm.newField = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
@@ -98,7 +98,7 @@
                 optionArray.push(vm.selectedField.options[o].label + ":" + vm.selectedField.options[o].value)
             }
             if(optionArray.length != 0) {
-                console.log("editField", vm.selectedField.optionText);
+               // console.log("editField", vm.selectedField.optionText);
                 vm.selectedField.optionText = optionArray.join("\n");
             }
             else {
@@ -133,7 +133,7 @@
 
 
         function cloneField(field) {
-            console.log("I am going to clone " +field.label);
+           // console.log("I am going to clone " +field.label);
             FieldService
                 .createFieldForForm(formId, field)
                 .then(init);
@@ -142,9 +142,9 @@
 
 
         function deleteField(index) {
-            console.log("deleting field");
+           // console.log("deleting field");
             var fieldToDelete = vm.fields[index];
-            console.log(fieldToDelete._id);
+           // console.log(fieldToDelete._id);
             FieldService
                 .deleteFieldFromForm(formId, fieldToDelete._id)
                 .then(init);

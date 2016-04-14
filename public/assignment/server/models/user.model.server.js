@@ -97,11 +97,11 @@ module.exports = function (mongoose, db) {
 
             // reject promise if error
             if (err) {
-                console.log(err);
+               // console.log(err);
                 deferred.reject(err);
             } else {
                 // resolve promise with user
-                console.log(doc);
+               // console.log(doc);
                 deferred.resolve(doc);
             }
         });

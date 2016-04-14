@@ -20,7 +20,7 @@
         vm.update = update;
 
         function update(user) {
-            console.log("updating in function update");
+           // console.log("updating in function update");
             if (!user.password) {
                 vm.message = "Password is required.";
             }

@@ -50,9 +50,10 @@ module.exports = function (app, formModel) {
 
     function addFormForUser(req, res) {
         var userId = req.params.userId;
+        // console.log("AddFormForUser service server", userId);
         var form = req.body;
         form.userId = userId;
-        console.log("form from server service:", form);
+        // console.log("form from server service:", form);
         formModel.createForm(form)
             .then(
                 function (doc) {

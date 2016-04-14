@@ -62,7 +62,7 @@ module.exports = function(app, userModel){
 
     function getUserByUsername (req, res) {
         var username = req.query.username;
-        console.log("username is " +username);
+       // console.log("username is " +username);
         for(var m in mock) {
             if(mock[m].username === username) {
                 res.json(mock[m]);

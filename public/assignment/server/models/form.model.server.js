@@ -22,6 +22,7 @@ module.exports = function(mongoose, db) {
         // specific service for form operation
         findFormByTitle: findFormByTitle,
         findFormsByUserId: findFormsByUserId,
+        findIndexById: findIndexById
 
     };
     return api;

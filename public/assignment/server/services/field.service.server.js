@@ -63,14 +63,14 @@ module.exports = function (app, fieldModel) {
                     res.json(doc);
                 },
                 function (err) {
-                    console.log(err);
+                    //console.log(err);
                     res.status(400).send(err);
                 }
             )
     }
 
     function updateFormField(req, res) {
-        console.log("field updating in server");
+       // console.log("field updating in server");
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var field = req.body;
