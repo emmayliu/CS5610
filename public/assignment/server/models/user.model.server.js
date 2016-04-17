@@ -6,14 +6,16 @@
 var q = require("q");
 
 
-module.exports = function (mongoose, db) {
+module.exports = function (mongoose) {
     var UserSchema = require('./user.schema.server.js')(mongoose);
     var UserModel = mongoose.model('UserModel', UserSchema);
     var api = {
         createUser: createUser,
+        register: register,
         findAllUsers: findAllUsers,
         findUserById: findUserById,
-        updateUser: updateUser,
+        updateUserById: updateUser,
+        updateUserByIdAdmin: updateUserAdmin,
         deleteUser: deleteUser,
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername
@@ -23,6 +25,38 @@ module.exports = function (mongoose, db) {
     function createUser(user) {
        var deferred = q.defer();
 
+
+        UserModel.findOne({username: user.username},
+            function (err, doc) {
+                if (err) {
+                    deferred.reject(err);
+                }
+                if (doc) {
+                    deferred.resolve(null);
+                } else {
+                    UserModel.create(user, function (err, newUser) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            UserModel.find({}, function(err, users) {
+                                if(err) {
+                                    deferred.reject(err);
+                                } else {
+                                    deferred.resolve(users);
+                                }
+                            });
+
+                        }
+                    });
+                }
+            });
+
+        return deferred.promise;
+    }
+
+
+    function register(user) {
+        var deferred = q.defer();
 
         UserModel.findOne({username: user.username},
             function (err, doc) {
@@ -47,7 +81,10 @@ module.exports = function (mongoose, db) {
         return deferred.promise;
     }
 
-    function findAllUsers(req, res){
+
+
+
+    function findAllUsers(){
         var deferred = q.defer();
         UserModel.find({}, function (err, users) {
             if (err) {
@@ -75,7 +112,6 @@ module.exports = function (mongoose, db) {
     function findUserByUsername(username) {
         var deferred = q.defer();
 
-        // find all users in array of user IDs
         UserModel.findOne({
             username: username
         }, function (err, doc) {
@@ -95,14 +131,35 @@ module.exports = function (mongoose, db) {
         delete user._id;
         UserModel.update({_id: id}, user, function (err, doc) {
 
-            // reject promise if error
             if (err) {
-               // console.log(err);
+                deferred.reject(err);
+            } else {
+                deferred.resolve(doc);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+
+    function updateUserAdmin(id, user) {
+        var deferred = q.defer();
+
+        delete user._id;
+        UserModel.update({_id: id}, user, function (err, doc) {
+
+            if (err) {
+                console.log(err);
                 deferred.reject(err);
             } else {
                 // resolve promise with user
-               // console.log(doc);
-                deferred.resolve(doc);
+                UserModel.find({}, function (err, users) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(users);
+                    }
+                });
             }
         });
 
@@ -133,15 +190,12 @@ module.exports = function (mongoose, db) {
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
 
-        // find one retrieves one document
         UserModel.findOne(
-            // first argument is predicate
             {
                 username: credentials.username,
                 password: credentials.password
             },
 
-            // doc is unique instance matches predicate
             function (err, doc) {
 
                 if (err) {

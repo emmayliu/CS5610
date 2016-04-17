@@ -11,43 +11,77 @@
     function userService($http, $rootScope, $q) {
 
         var model = {
-            findUserByCredentials: findUserByCredentials,
+            login: login,
+            findUserById: findUserById,
             findAllUsers: findAllUsers,
+            register: register,
+            logout: logout,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
-            findUserByUsername: findUserByUsername,
-            findUserById: findUserById,
-            getCurrentUser: getCurrentUser,
-            setCurrentUser: setCurrentUSer
+            updateUserAdmin: updateUserAdmin,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser
 
         };
 
         return model;
 
-        function setCurrentUSer(user) {
+        function setCurrentUser(user) {
             $rootScope.currentUser = user;
         }
+
         function getCurrentUser() {
             return $rootScope.currentUser;
         }
 
-
-
-        function findUserByCredentials(username, password) {
+        function login(user) {
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/user?username=" + username + "&password=" + password)
+                .post("/api/assignment/login", user)
                 .then(function(response) {
                     deferred.resolve(response);
                 });
             return deferred.promise;
         }
 
+        function register(user) {
+            var deferred = $q.defer();
+            $http
+                .post("/api/assignment/register", user)
+                .then(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+        function logout(user) {
+            var deferred = $q.defer();
+            $http
+                .post("/api/assignment/logout", user)
+                .then(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+
+        }
+
+        function updateUserAdmin(userId, user) {
+            var deferred = $q.defer();
+            $http
+                .put("/api/assignment/admin/user/" + userId, user)
+                .then(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+
+
         function findAllUsers() {
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/user")
+                .get("/api/assignment/admin/user")
                 .then(function(response) {
                     deferred.resolve(response);
                 });
@@ -57,7 +91,7 @@
         function createUser(user) {
             var deferred = $q.defer();
             $http
-                .post("/api/assignment/user", user)
+                .post("/api/assignment/admin/user", user)
                 .then(function(response) {
                     deferred.resolve(response);
                 });
@@ -67,7 +101,7 @@
         function deleteUserById(userId) {
             var deferred = $q.defer();
             $http
-                .delete("/api/assignment/user/" + userId)
+                .delete("/api/assignment/admin/user/" + userId)
                 .then(function(response) {
                     deferred.resolve(response);
                 });
@@ -84,20 +118,12 @@
             return deferred.promise;
         }
 
-        function findUserByUsername(username) {
-            var deferred = $q.defer();
-            $http
-                .get("/api/assignment/user?username=" + username)
-                .then(function (response) {
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
-        }
+
 
         function findUserById(id) {
             var deferred = $q.defer();
             $http
-                .get("/api/assignment/user/" + id)
+                .get("/api/assignment/admin/user/" + id)
                 .then(function (response) {
                     deferred.resolve(response);
                 });

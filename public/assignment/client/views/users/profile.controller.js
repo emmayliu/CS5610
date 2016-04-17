@@ -9,10 +9,11 @@
 
     function profileController($location, UserService) {
         var vm = this;
+        vm.error = null;
         vm.message = null;
         vm.currentUser = UserService.getCurrentUser();
 
-        if(!vm.currentUser) {
+        if (!vm.currentUser) {
             $location.url("/home");
         }
 
@@ -20,22 +21,28 @@
         vm.update = update;
 
         function update(user) {
-           // console.log("updating in function update");
-            if (!user.password) {
-                vm.message = "Password is required.";
+
+            if (user.verifyPassword != null)
+            {
+                if (user.verifyPassword != user.password) {
+                    vm.message = "Password doesn't match";
+                    return;
+                }
+            }
+            else
+            {
+                delete user.password;
             }
 
-            if (!user.email) {
-                vm.message = "Please enter your email.";
-            }
+
             UserService
                 .updateUser(vm.currentUser._id, user)
                 .then(function (response) {
-                    var cUser = response.data;
-                    if (cUser != null) {
-                        vm.currentUser = cUser;
-                    }
-                });
+                    vm.message = "Update Succussfuly";
+                    },
+                    function (error) {
+                        vm.error = error;
+                    });
         }
     }
 })();

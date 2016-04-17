@@ -25,7 +25,7 @@
                     .findAllFormsForUser(currentUser._id)
                     .then(function (response) {
                         vm.forms = response.data;
-                        console.log(vm.forms);
+                        //console.log(vm.forms);
                     })
             }
         }
@@ -38,7 +38,7 @@
 
 
         function addForm(form) {
-            console.log("add form");
+            //console.log("add form");
             form.fields = [];
             FormService
                 .createFormForUser(currentUser._id, form)

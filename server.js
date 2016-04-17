@@ -11,6 +11,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+app.use(multer());
+
 // create a default connection string
 var connectionString = 'mongodb://localhost/webdev2016';
 
@@ -34,6 +36,26 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 //security
+
+var passport      = require('passport');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
+
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+//for lecture practice
+/*app.post("/rest/user", function(req, res){
+    var user = req.body;
+    console.log("posting", user);
+});
+*/
 
 
 

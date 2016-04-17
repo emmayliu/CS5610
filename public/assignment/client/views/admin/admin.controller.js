@@ -6,64 +6,126 @@
         .module("FormBuilderApp")
         .controller("AdminController", adminController);
 
-    function adminController(UserService, $rootScope) {
+    function adminController(UserService) {
         var vm = this;
-        vm.message = null;
         vm.addUser = addUser;
-        vm.deleteUser = deleteUser;
         vm.updateUser = updateUser;
-        vm.selectUser = selectUser;
-        vm.currentUser = null;
+        vm.deleteUser = deleteUser;
+        vm.editUser = editUser;
+        vm.rolesToString = rolesToString;
+        vm.sortByUsername = sortByUsername;
+        vm.sortByFirstName = sortByFirstName;
+        vm.sortByLastName = sortByLastName;
+        vm.sortedByUsername = null;
+        vm.sortedByFirstName = null;
+        vm.sortedByLastName = null;
+
         vm.users = [];
-        vm.newUser = {"username": "", "password": "", "roles": ""};
-        var currentUser = null;
-
         function init() {
-            currentUser = UserService.getCurrentUser();
-            if(currentUser != null && currentUser.roles.indexOf('admin') >= 0) {
-                UserService
-                    .findAllUsers()
-                    .then(function (response) {
-                        vm.users = response.data;
-                        console.log(vm.users);
-
-                    })
-            }
+            UserService
+                .findAllUsers()
+                .then(function (response) {
+                    vm.users = response.data;
+                })
         }
 
         init();
 
         function addUser(user) {
-            console.log("adding user");
+            user.roles = stringToRoles(user.roles);
             UserService
                 .createUser(user)
-                .then(init);
+                .then(function (response) {
+                    vm.users = response.data;
+                });
         }
 
-
-        function selectUser(index) {
-            vm.selectedUser = vm.users[index];
-            vm.newUser.username = vm.selectedUser.username;
-            vm.newUser.password = vm.selectedUser.password;
-            vm.newUser.roles = vm.selectedUser.roles;
+        function updateUser() {
+            if (vm.newUser._id != null) {
+                UserService
+                    .updateUserAdmin(vm.newUser._id, vm.newUser)
+                    .then(function (response) {
+                        vm.users = response.data;
+                        vm.newUser = {};
+                    });
+            }
         }
 
         function deleteUser(index) {
             var userToDelete = vm.users[index];
             UserService
                 .deleteUserById(userToDelete._id)
-                .then(init);
+                .then(function (response) {
+                    vm.users = response.data;
+                });
         }
 
-        function updateUser() {
-            if(vm.selectedUser != null) {
-                UserService
-                    .updateUser(vm.selectedUser._id, vm.newUser)
-                    .then(init);
+        function editUser(index) {
+            vm.newUser = vm.users[index];
+        }
 
+        function rolesToString(roles) {
+            var rolesStr = ""
+            for (var r in roles) {
+                if (r != 0) {
+                    rolesStr += ",";
+                }
+                rolesStr += roles[r];
+            }
+            return rolesStr;
+        }
+
+        function stringToRoles(rStr) {
+            return rStr.split(',');
+        }
+
+        function sortByUsername() {
+            if (vm.sortedByUsername) {
+                vm.users.sort(function (a, b) {
+                    return a.username.localeCompare(b.username);
+                });
+                vm.sortedByUsername = false;
+            } else {
+                vm.users.sort(function (a, b) {
+                    return b.username.localeCompare(a.username);
+                });
+                vm.sortedByUsername = true;
+                vm.sortedByFirstName = null;
+                vm.sortedByLastName = null;
             }
         }
 
+        function sortByFirstName() {
+            if (vm.sortedByFirstName) {
+                vm.users.sort(function (a, b) {
+                    return a.firstName.localeCompare(b.firstName);
+                });
+                vm.sortedByFirstName = false;
+            } else {
+                vm.users.sort(function (a, b) {
+                    return b.firstName.localeCompare(a.firstName);
+                });
+                vm.sortedByFirstName = true;
+                vm.sortedByUsername = null;
+                vm.sortedByLastName = null;
+            }
+        }
+
+        function sortByLastName() {
+            if (vm.sortedByLastName) {
+                vm.users.sort(function (a, b) {
+                    return a.lastName.localeCompare(b.lastName);
+                });
+                vm.sortedByLastName = false;
+            } else {
+                vm.users.sort(function (a, b) {
+                    return b.lastName.localeCompare(a.lastName);
+                });
+                vm.sortedByLastName = true;
+                vm.sortedByUsername = null;
+                vm.sortedByFirstName = null;
+            }
+        }
     }
 
 })();

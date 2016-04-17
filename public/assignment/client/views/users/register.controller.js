@@ -18,39 +18,53 @@
         {
             if(!user){
                 vm.message = "enter valid information";
+                return;
             }
 
-            else if(!user.username){
+            if(!user.username){
                 vm.message ="Please enter username";
+                return;
             }
-            else if(!user.password || !user.verifyPassword)
+            if(!user.password || !user.verifyPassword)
             {
                 vm.message = "Please enter passwords";
+                return;
 
             }
-
-            else if(user.password != user.verifyPassword) {
+            if(user.password != user.verifyPassword) {
                 vm.message = "Your passwords don't match";
+                return;
 
             }
-
-            else if(!user.email){
+            if(!user.email){
                 vm.message = "Please enter a valid email";
+                return;
+            }
+            if(!user.role) {
+                vm.message = "Please enter the role";
+                return;
             }
 
-            else {
-
-                UserService
-                    .createUser(user)
-                    .then(function (response) {
-                        var newUser = response.data;
-                        console.log("RETURNED USER", newUser);
+            user.firstName = "";
+            user.lastName = "";
+            user.roles = [user.role];
+            user.email = [user.email];
+            UserService
+                .register(user)
+                .then(function (response) {
+                    var newUser = response.data;
+                    if(newUser == null) {
+                        vm.message = "Username already existed!";
+                    }
+                    else {
+                        delete newUser.password;
                         UserService.setCurrentUser(newUser);
-                        //console.log(user);
                         $location.url("/profile");
 
-                    });
-            }
+                    }
+                        //console.log("RETURNED USER", newUser);
+                        //console.log(user)
+                });
 
 
 
