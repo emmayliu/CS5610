@@ -16,8 +16,16 @@
         init();
 
         function logout() {
-            UserService.setCurrentUser(null);
-            $location.url("/home");
+            UserService
+                .logout()
+                .then(function (response) {
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");
+
+                },
+                function(err) {
+                    $scope.error = err;
+                });
         }
 
         function isAdmin() {

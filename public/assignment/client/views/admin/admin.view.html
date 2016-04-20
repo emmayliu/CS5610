@@ -7,10 +7,13 @@
             <thead>
             <tr>
                 <th nowrap>
-                        <span ng-show="model.sortedByUsername != null"
-                              class="glyphicon glyphicon-triangle-bottom"
-                              aria-hidden="true"></span>
-                    <a href="" ng-click="model.sortByUsername()">Username</a>
+                      <span ng-show="model.sortedByUsername != null && !sortReverse"
+                              class="glyphicon glyphicon-triangle-bottom"></span>
+                           <span ng-show="model.sortedByUsername != null && sortReverse"
+                                 class="glyphicon glyphicon-triangle-top"></span>
+                       <a href="" ng-click = "model.sortByUsername(); sortReverse = !sortReverse">
+                           Username
+                       </a>
                     <div>
                         <input ng-model="model.newUser.username" type="text" class="form-control" id="inputUsername"
                                placeholder="Username">
@@ -25,20 +28,26 @@
                 </th>
 
                 <th nowrap>
-                        <span ng-show="model.sortedByFirstName != null"
-                              class="glyphicon glyphicon-triangle-bottom"
-                              aria-hidden="true"></span>
-                    <a href="" ng-click="model.sortByFirstName()">First Name</a>
+                       <span ng-show="model.sortedByFirstName != null && !sortReverse"
+                             class="glyphicon glyphicon-triangle-bottom"></span>
+                           <span ng-show="model.sortedByFirstName != null && sortReverse"
+                                 class="glyphicon glyphicon-triangle-top"></span>
+                    <a href="" ng-click = "model.sortByFirstName(); sortReverse = !sortReverse">
+                        FirstName
+                    </a>
                     <div>
                         <input ng-model="model.newUser.firstName" type="text" class="form-control"
                                id="inputFirstName" placeholder="First Name">
                     </div>
                 </th>
                 <th nowrap>
-                        <span ng-show="model.sortedByLastName != null"
-                              class="glyphicon glyphicon-triangle-bottom"
-                              aria-hidden="true"></span>
-                    <a href="" ng-click="model.sortByLastName()">Last Name</a>
+                       <span ng-show="model.sortedByLastName != null && !sortReverse"
+                             class="glyphicon glyphicon-triangle-bottom"></span>
+                           <span ng-show="model.sortedByLastName != null && sortReverse"
+                                 class="glyphicon glyphicon-triangle-top"></span>
+                    <a href="" ng-click = "model.sortByLastName(); sortReverse = !sortReverse">
+                        LastName
+                    </a>
                     <div>
                         <input ng-model="model.newUser.lastName" type="text" class="form-control" id="inputLastName"
                                placeholder="Last Name">
