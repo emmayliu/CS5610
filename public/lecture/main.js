@@ -4,11 +4,11 @@
 (function () {
     $(init);
 
-    fuction init()
+     function init()
     {
         console.log("hello, world");
 
         $("#clickBtn")
             .click()
     }
-})
+})();

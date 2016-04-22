@@ -3,7 +3,8 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var app = express();
 var mongoose = require('mongoose');
-
+var fs = require('fs');
+var upload = multer();
 
 app.use(express.static(__dirname + '/public'));
 
@@ -50,21 +51,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
-//for lecture practice
-/*app.post("/rest/user", function(req, res){
-    var user = req.body;
-    console.log("posting", user);
-});
-*/
 
-
-
-app.get('/hello', function(req, res){
-  res.send('hello world');
-});
-
-
-require("./public/assignment/server/app.js")(app, mongoose, db);
+require("./public/project/server/app.js")(app, mongoose, db);
+//require("./public/assignment/server/app.js")(app, mongoose, db);
 
 app.listen(port, ipaddress); //listening for incoming request
 
