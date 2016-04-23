@@ -53,8 +53,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//require("./public/project/server/app.js")(app, mongoose, db);
-require("./public/assignment/server/app.js")(app, mongoose, db, passport, LocalStrategy);
+require("./public/project/server/app.js")(app, mongoose, db, passport, LocalStrategy);
+//require("./public/assignment/server/app.js")(app, mongoose, db, passport, LocalStrategy);
 
 app.listen(port, ipaddress); //listening for incoming request
 
