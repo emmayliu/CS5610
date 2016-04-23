@@ -5,30 +5,25 @@
     "use strict";
     angular
         .module("MovieApp")
-        .controller("LoginController", loginController);
+        .controller("LoginController", LoginController);
 
 
-    function loginController($location, UserService) {
-        var vm = this;
-        vm.message = null;
+    function LoginController($location, UserService, $rootScope, $scope) {
+        $scope.$location = $location;
+        $scope.isLoggedIn = false;
+        $scope.login = login;
 
-        vm.login = login;
-
-        function init() {
-        }
-        init();
 
         function login(user) {
-            if(!user) {
-                return;
-            }
+            console.log("log in controller");
             UserService
                 .login(user)
                 .then(function (response) {
                         if (response.data) {
-                            var resUser = response.data;
-                            delete resUser.password;
-                            UserService.setCurrentUser(resUser);
+                            $scope.isLoggedIn = "true";
+                            $rootScope.user = response.data;
+                            UserService.setCurrentUser($rootScope.user);
+                            $('#loginModal').modal('hide');
                             $location.url("/profile");
                         }
                     });

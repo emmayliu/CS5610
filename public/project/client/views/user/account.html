@@ -1,5 +1,5 @@
 <div class="container" style="padding-top: 60px;">
-    <h1 class="page-header">Edit Profile</h1>
+    <h1 class="page-header">Hello {{user.username}} Edit Profile</h1>
     <div class="row">
         <!-- left column -->
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div ng-model=user.username class="form-group">
                     <label class="col-md-3 control-label">Username:</label>
                     <div class="col-md-8">
                         <input class="form-control" placeholder="Username" type="text">

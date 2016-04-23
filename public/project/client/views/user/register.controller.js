@@ -5,35 +5,34 @@
 (function () {
     angular
         .module("MovieApp")
-        .controller("RegisterController", registerController);
+        .controller("RegisterController", RegisterController);
 
-    function registerController($location, UserService) {
-        var vm = this;
-        vm.message =null;
+    function RegisterController($location, UserService, $scope) {
 
-        vm.register = register;
+        $scope.$location = $location;
+        $scope.register = register;
 
 
         function register(user)
         {
             console.log("registering in controller" +user);
             if(!user){
-                vm.message = "enter valid information";
+                $scope.message = "enter valid information";
                 return;
             }
 
             if(!user.username){
-                vm.message ="Please enter username";
+                $scope.message ="Please enter username";
                 return;
             }
             if(!user.password || !user.verifyPassword)
             {
-                vm.message = "Please enter passwords";
+                $scope.message = "Please enter passwords";
                 return;
 
             }
             if(user.password != user.verifyPassword) {
-                vm.message = "Your passwords don't match";
+                $scope.message = "Your passwords don't match";
                 return;
 
             }
@@ -46,11 +45,12 @@
                 .then(function (response) {
                     var newUser = response.data;
                     if(newUser == null) {
-                        vm.message = "Username already existed!";
+                        $scope.message = "Username already existed!";
                     }
                     else {
                         delete newUser.password;
                         UserService.setCurrentUser(newUser);
+                        $('#loginModal').modal('hide');
                         $location.url("/profile");
 
                     }
