@@ -22,9 +22,9 @@ module.exports = function(app, userModel){
     app.put("/api/project/admin/user/:userId", admin, updateUserAdmin);
 
 
-    passport.use(new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+   passport.use(new LocalStrategy(localStrategy));
+   passport.serializeUser(serializeUser);
+   passport.deserializeUser(deserializeUser);
 
     // functions
     function localStrategy(username, password, done) {

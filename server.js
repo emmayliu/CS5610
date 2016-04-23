@@ -4,7 +4,7 @@ var multer = require('multer');
 var app = express();
 var mongoose = require('mongoose');
 var fs = require('fs');
-var upload = multer();
+
 
 app.use(express.static(__dirname + '/public'));
 
@@ -38,6 +38,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 //security
 
+var LocalStrategy = require('passport-local').Strategy;
 var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
@@ -52,8 +53,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-require("./public/project/server/app.js")(app, mongoose, db);
-//require("./public/assignment/server/app.js")(app, mongoose, db);
+//require("./public/project/server/app.js")(app, mongoose, db);
+require("./public/assignment/server/app.js")(app, mongoose, db, passport, LocalStrategy);
 
 app.listen(port, ipaddress); //listening for incoming request
 

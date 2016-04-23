@@ -40,14 +40,27 @@
                 });
         }
 
+        function rolesToString(roles) {
+            var rolesStr = "";
+            for (var r in roles) {
+                if (r != 0) {
+                    rolesStr += ",";
+                }
+                rolesStr += roles[r];
+            }
+            return rolesStr;
+        }
+
+
+        function stringToRoles(rStr) {
+            return rStr.split(',');
+        }
+
         function updateUser() {
             if (vm.newUser._id != null) {
                 UserService
                     .updateUserAdmin(vm.newUser._id, vm.newUser)
-                    .then(function (response) {
-                        vm.users = response.data;
-                        vm.newUser = {};
-                    });
+                    .then(init);
             }
         }
 
@@ -64,20 +77,7 @@
             vm.newUser = vm.users[index];
         }
 
-        function rolesToString(roles) {
-            var rolesStr = ""
-            for (var r in roles) {
-                if (r != 0) {
-                    rolesStr += ",";
-                }
-                rolesStr += roles[r];
-            }
-            return rolesStr;
-        }
 
-        function stringToRoles(rStr) {
-            return rStr.split(',');
-        }
 
         function sortByUsername() {
             if (vm.sortedByUsername) {

@@ -15,6 +15,10 @@
 
         if (!vm.currentUser) {
             $location.url("/home");
+        } else {
+            if(vm.currentUser.emails) {
+                vm.currentUser.email = vm.currentUser.emails[0];
+            }
         }
 
 
@@ -22,17 +26,28 @@
 
         function update(user) {
 
-            if (user.verifyPassword != null)
-            {
+            if(!user.verifyPassword) {
+                vm.message = "Please update password for security";
+                return;
+            }
+
+            if (user.verifyPassword) {
                 if (user.verifyPassword != user.password) {
-                    vm.message = "Password doesn't match";
+                    vm.message = "Passwords don't match.";
                     return;
                 }
-            }
-            else
-            {
+            } else {
                 delete user.password;
             }
+
+
+
+            if(!user.email) {
+                vm.message = "Please enter email";
+                return;
+            }
+
+            user.emails = [user.email];
 
 
             UserService

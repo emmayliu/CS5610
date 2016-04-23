@@ -14,7 +14,7 @@ module.exports = function (mongoose) {
         password: { type: String, required: true },
         firstName: String,
         lastName: String,
-        email: String,
+        emails: String,
         roles: [String],
         movies: {type: [MovieSchema], default: []},
         reviews: {type: [ReviewSchema], default: []},

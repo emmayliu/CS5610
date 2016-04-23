@@ -3,11 +3,10 @@
  */
 
 "use strict";
+var bcrypt = require("bcrypt-nodejs");
 
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function(app, userModel){
+module.exports = function(app, userModel, passport, LocalStrategy){
     var auth = authorized;
     var admin = isAdmin;
 
@@ -30,21 +29,26 @@ module.exports = function(app, userModel){
     // functions
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials({username: username, password: password})
+            .findUser({username: username, password: password})
             .then(
                 function (user) {
                     if (!user) {
                         return done(null, false);
+                    }else if(bcrypt.compareSync(password, user.password)){
+                        return done(null, user)
+                    } else {
+                        return done(null, false);
                     }
-                    return done(null, user);
+
                 },
-                function (err) {
+
+                function(err) {
                     if (err) {
                         return done(err);
                     }
                 }
             );
-    }
+        }
 
     function serializeUser(user, done) {
         done(null, user);
@@ -129,6 +133,7 @@ module.exports = function(app, userModel){
                     if (user) {
                         res.json(null);
                     } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.register(newUser);
                     }
                 },
@@ -156,6 +161,7 @@ module.exports = function(app, userModel){
 
     function addUser(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
 
         userModel.createUser(user)
             .then(
@@ -179,36 +185,59 @@ module.exports = function(app, userModel){
     }
 
     function updateUser(req, res) {
-        var id = req.params.userId;
-        var user = req.body;
-        if (req.user._id == id) {
-            userModel.updateUserById(id, user)
-                .then(
-                    function (stats) {
-                        res.send(200);
-                    },
-                    function (err) {
-                        res.status(400).send(err);
-                    }
-                );
-        } else {
-            res.send(401);
+        var userId = req.params.userId;
+        var newUser = req.body;
+        if(typeof newUser.roles == "string") {
+            newUser.roles = newUser.roles.split(",");
         }
+
+        userModel
+            .findUserById(userId)
+            .then(function (user) {
+                if(user.password != newUser.password) {
+                    newUser.password = bcrypt.hashSync(newUser.password);
+                }
+                        userModel
+                            .updateUserById(userId, newUser)
+                            .then(
+                                function(user) {
+                                    res.json(user);
+                                },
+                                function(err) {
+                                    res.status(400).send(err);
+                                }
+                            );
+                    });
 
     }
 
     function updateUserAdmin(req, res) {
-        var id = req.params.userId;
-        var user = req.body;
-        userModel.updateUserByIdAdmin(id, user)
-            .then(
-                function (doc) {
-                    res.json(doc);
-                },
-                function (err) {
-                    res.status(400).send(err);
+        var userId = req.params.userId;
+        var newUser = req.body;
+
+        for(var e in newUser.emails) {
+          newUser.emails[e] = newUser.emails[e].trim();
+        }
+
+        userModel
+            .findUserById(userId)
+            .then(function (user) {
+                if(user.password != newUser.password) {
+                    newUser.password = bcrypt.hashSync(newUser.password);
                 }
-            );
+                userModel
+                    .updateUserById(userId, newUser)
+                    .then(
+                        function(user) {
+                            res.json(user);
+                        },
+                        function(err) {
+                            res.status(400).send(err);
+                        }
+                    );
+            });
+
+
     }
 
     function deleteUser(req, res) {

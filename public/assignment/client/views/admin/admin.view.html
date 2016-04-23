@@ -23,7 +23,7 @@
                 <th nowrap> Password
                     <div>
                         <input ng-model="model.newUser.password" type="password" class="form-control"
-                               id="inputPassword" placeholder="Password">
+                               id="inputPassword" placeholder="password" value="{{model.user.password}}">
                     </div>
                 </th>
 
@@ -76,7 +76,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="u in model.users track by u._id">
+            <tr ng-repeat="u in model.users track by $index">
                 <td class="td-text">{{u.username}}</td>
                 <td></td>
                 <td class="td-text">{{u.firstName}}</td>

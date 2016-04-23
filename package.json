@@ -10,7 +10,7 @@
   ],
   "author": {
     "name": "Emma",
-    "email": "liu.yuji@husky.neu.edu",
+    "emails": "liu.yuji@husky.neu.edu",
     "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",
@@ -23,6 +23,7 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "~3.4.4",
