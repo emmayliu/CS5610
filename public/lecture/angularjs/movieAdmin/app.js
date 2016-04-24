@@ -22,7 +22,7 @@
 
         // event handler implementation
         function addMovie(movie) {
-            //console.log("Add movie;" + $scope.movie.title);
+            //console.log("Add favorite;" + $scope.favorite.title);
             var newMovie = {
                 id: movie.id,
                 title: movie.title,

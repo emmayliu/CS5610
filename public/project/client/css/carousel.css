@@ -138,3 +138,30 @@ body {
         margin-top: 120px;
     }
 }
+
+.wrap {
+    width: 100%;
+}
+
+.floatleft, .floatright {
+    float:left;
+    width: 20%;
+    height: 800px;
+}
+
+.floatright {
+    width: 80%;
+}
+
+
+ul.fullsizelist{
+    position:absolute;
+    top:0;
+    left:0;
+    transition:  left .8s ease;
+}
+
+
+.thumb {
+    margin-bottom: 30px;
+}

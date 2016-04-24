@@ -1,5 +1,6 @@
+<div ng-controller="AccountController">
 <div class="container" style="padding-top: 60px;">
-    <h1 class="page-header">Hello {{user.username}} Edit Profile</h1>
+    <h1 class="page-header"><i class="fa fa-coffee"></i>Hello {{currentUser.username}} Edit Profile</h1>
     <div class="row">
         <!-- left column -->
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -10,61 +11,60 @@
             </div>
         </div>
         <!-- edit form column -->
-        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-            <div class="alert alert-info alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a>
-                <i class="fa fa-coffee"></i>
-                This is an <strong>.alert</strong>. Use this to show important messages to the user.
-            </div>
+        <div ng-show="model.message" class="alert alert-danger" role="alert">{{model.message}}</div>
+        <div class="col-md-8 col-sm-6 col-xs-12">
+
             <h3>Personal info</h3>
             <form class="form-horizontal" role="form">
                 <div class="form-group">
                     <label class="col-lg-3 control-label">First name:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="First name" type="text">
+                        <input ng-model="currentUser.firstName" class="form-control" placeholder="First name"
+                               type="text">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Last name:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="Last name" type="text">
+                        <input ng-model="currentUser.lastName" class="form-control" placeholder="Last name" type="text">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Email:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" placeholder="you@email.com" type="text">
+                        <input ng-model="currentUser.email" class="form-control" placeholder="you@email.com"
+                               type="text">
                     </div>
                 </div>
 
-                <div ng-model=user.username class="form-group">
+                <div class="form-group">
                     <label class="col-md-3 control-label">Username:</label>
                     <div class="col-md-8">
-                        <input class="form-control" placeholder="Username" type="text">
+                        <input ng-model="currentUser.username"  class="form-control" placeholder="Username" type="text">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Password:</label>
                     <div class="col-md-8">
-                        <input class="form-control"  type="password">
+                        <input ng-model="currentUser.password" class="form-control"  type="password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Confirm password:</label>
                     <div class="col-md-8">
-                        <input class="form-control"  type="password">
+                        <input ng-model="currentUser.verifyPassword" class="form-control"  type="password">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8">
-                        <input class="btn btn-primary" value="Save Changes" type="button">
-                        <span></span>
+                        <button ng-click="model.update(currentUser)" class="btn btn-primary">Save Change</button>
                         <input class="btn btn-default" value="Cancel" type="reset">
                     </div>
                 </div>
             </form>
         </div>
     </div>
+</div>
 </div>

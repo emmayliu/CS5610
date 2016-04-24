@@ -1,9 +1,26 @@
-<div class="elephant">
+<div ng-controller="SearchController">
+    <div class="wrap" style="padding-top: 100px">
 
-    <div class="row">
-
-           <h2>SEARCH RESULT FOR: {{movie.title}}</h2>
-
-
+        <h1 style="padding-left: 500px">Movie Search</h1>
+        <div class="search">
+            <input ng-model="model.movie.title"
+                   type="text" class="form-control input-sm" maxlength="200" placeholder="princess"/>
+            <button ng-click="model.search(model.movie)" type="submit" class="btns btn-primary btn-sm">Click Me</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <div ng-if="model.data">
+                <div class= "col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="movie in model.data.Search">
+                    <div class="thumbnail">
+                        <img class="img-responsive" ng-src="{{movie.Poster}}">
+                        <div class="caption">
+                            <h4>{{movie.Title}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

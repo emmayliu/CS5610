@@ -29,7 +29,6 @@
                 .findAllUsers()
                 .then(function (response) {
                     model.users = response.data;
-                    console.log(model.users);
                 })
         }
 
@@ -40,7 +39,7 @@
             UserService
                 .createUser(user)
                 .then(function (response) {
-                    model.users = response;
+                    model.users = response.data;
                 });
         }
 

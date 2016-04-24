@@ -18,13 +18,22 @@
             })
 
             .when("/search", {
-                templateUrl: "views/search/search.html"
+                templateUrl: "views/search/search.html",
+                controller: "SearchController",
+                controllerAs: "model"
             })
             .when("/account", {
-                templateUrl: "views/user/account.html"
+                templateUrl: "views/user/account.html",
+                controller: "AccountController",
+                controllerAs: "model"
+
             })
             .when("/profile", {
                 templateUrl: "views/user/profile.html"
+            })
+
+            .when("/review", {
+                templateUrl: "views/review/review.html"
             })
             .when("/admin", {
                 templateUrl: "views/admin/admin.html",
@@ -35,6 +44,21 @@
                 }
             })
 
+            .when("/favorite", {
+                templateUrl: "views/favorite/favorite.html"
+            })
+
+            .when("/following", {
+                templateUrl: "views/user/following.html"
+            })
+
+            .when("/follower", {
+                templateUrl: "views/user/follower.html"
+            })
+
+            .when("/review", {
+                templateUrl: "views/review/review.html"
+            })
 
             .otherwise({
                 redirectTo: "/home"
