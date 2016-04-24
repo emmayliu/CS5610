@@ -1,12 +1,15 @@
 <div ng-controller="SearchController">
-    <div class="wrap" style="padding-top: 100px">
+    <div class=container style="padding-top: 100px">
 
-        <h1 style="padding-left: 500px">Movie Search</h1>
-        <div class="search">
-            <input ng-model="model.movie.title"
-                   type="text" class="form-control input-sm" maxlength="200" placeholder="princess"/>
-            <button ng-click="model.search(model.movie)" type="submit" class="btns btn-primary btn-sm">Click Me</button>
-        </div>
+        <form role="form" id = "NPMSearchForm">
+            <div class="col-md-3"></div>
+            <div class=" col-md-6 input-group input-group-lg">
+                <input ng-model="model.movie.title" type="text" class="form-control" placeholder="princess">
+                <span ng-click="model.search(model.movie)" class="input-group-addon glyphicon glyphicon-search"></span>
+            </div>
+
+        </form>
+
         <br>
         <br>
         <br>
@@ -16,7 +19,9 @@
                     <div class="thumbnail">
                         <img class="img-responsive" ng-src="{{movie.Poster}}">
                         <div class="caption">
+                            <a href="#/details/{{movie.imdbID}}">
                             <h4>{{movie.Title}}</h4>
+                                </a>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,8 @@ module.exports = function (mongoose) {
         updateUserByIdAdmin: updateUserAdmin,
         deleteUser: deleteUser,
         findUserByCredentials: findUserByCredentials,
-        findUserByUsername: findUserByUsername
+        findUserByUsername: findUserByUsername,
+        userLikesMovie: userLikesMovie
     };
     return api;
 
@@ -184,6 +185,38 @@ module.exports = function (mongoose) {
         });
 
         return deferred.promise;
+    }
+
+    function userLikesMovie (userId, movie) {
+
+        var deferred = q.defer();
+
+        // find the user
+        UserModel.findById(userId, function (err, doc) {
+
+            // reject promise if error
+            if (err) {
+                deferred.reject(err);
+            } else {
+
+                // add movie id to user likes
+                doc.likes.push (movie.imdbID);
+
+                // save user
+                doc.save (function (err, doc) {
+
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+
+                        // resolve promise with user
+                        deferred.resolve (doc);
+                    }
+                });
+            }
+        });
+
+        return deferred;
     }
 
 
