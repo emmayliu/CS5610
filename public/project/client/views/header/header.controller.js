@@ -2,7 +2,7 @@
  * Created by emma on 4/20/16.
  */
 "use strict";
-"use strict";
+
 (function () {
     angular
         .module("MovieApp")

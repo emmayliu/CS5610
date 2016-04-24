@@ -2,11 +2,10 @@
  * Created by emma on 4/20/16.
  */
 "use strict";
+var bcrypt = require("bcrypt-nodejs");
 
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function(app, userModel){
+module.exports = function(app, userModel, passport, LocalStrategy){
     var auth = authorized;
     var admin = isAdmin;
 

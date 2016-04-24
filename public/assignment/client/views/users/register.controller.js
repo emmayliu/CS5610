@@ -36,7 +36,7 @@
                 return;
 
             }
-            if(!user.emails){
+            if(!user.email){
                 vm.message = "Please enter a valid email";
                 return;
             }
@@ -48,7 +48,7 @@
             user.firstName = "";
             user.lastName = "";
             user.roles = [user.role];
-            user.emails = [user.emails];
+            user.emails = [user.email];
             UserService
                 .register(user)
                 .then(function (response) {

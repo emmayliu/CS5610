@@ -86,13 +86,15 @@ module.exports = function (mongoose) {
 
     function findAllUsers(){
         var deferred = q.defer();
-        UserModel.find({}, function (err, users) {
+        console.log("finding user in server");
+        UserModel.find({}, function (err,users) {
             if (err) {
                 deferred.reject(err);
             } else {
                 deferred.resolve(users);
             }
         });
+
 
         return deferred.promise;
     }

@@ -26,6 +26,14 @@
             .when("/profile", {
                 templateUrl: "views/user/profile.html"
             })
+            .when("/admin", {
+                templateUrl: "views/admin/admin.html",
+                controller: "AdminController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkAdmin
+                }
+            })
 
 
             .otherwise({
@@ -37,7 +45,7 @@
     var checkAdmin = function ($q, $timeout, $http, $location, $rootScope, UserService) {
         var deferred = $q.defer();
 
-        $http.get('/api/assignment/loggedin').success(function (user) {
+        $http.get('/api/project/loggedin').success(function (user) {
             $rootScope.errorMessage = null;
             // User is Authenticated
             if (user !== '0' && user.roles.indexOf('admin') != -1) {

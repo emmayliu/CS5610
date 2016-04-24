@@ -15,7 +15,6 @@
 
 
         function login(user) {
-            console.log("log in controller");
             UserService
                 .login(user)
                 .then(function (response) {
