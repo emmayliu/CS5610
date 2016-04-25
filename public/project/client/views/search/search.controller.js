@@ -14,6 +14,8 @@
         vm.search = search;
         vm.favorite = favorite;
         vm.getMovieDetails = getMovieDetails;
+        vm.details = null;
+        vm.movie = null;
 
         function init() {
 
@@ -43,7 +45,7 @@
             OmdbService
                 .findMovieByImdbID (movie.imdbID)
                 .then(function(response){
-                    vm.data = response.data;
+                    vm.details = response.data;
                 });
 
             MovieService
