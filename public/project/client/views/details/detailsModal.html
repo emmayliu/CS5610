@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div  class="modal fade" id="detailsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{model.data.Title}}</h4>
+            </div>
+            <div class="modal-body">
+                <img ng-src="{{model.data.Poster}}" height="200px"/>
+                <h4>Plot</h4>
+                <p>
+                    {{model.data.Plot}}
+                </p>
+                <h4>Actors</h4>
+                <ul>
+                    <li ng-repeat="acotr in model.data.Actors.split(',')">
+                        {{actor}}
+                    </li>
+                </ul>
+
+                <div ng-if="model.movie.userLikes">
+                    <h4>Other Users that Like This Movie</h4>
+                    <ul>
+                        <li ng-repeat="user in model.movie.userLikes">
+                            <a href="#/profile/{{user.username}}">
+                                {{user.username}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="model.favorite(model.data)">
+                            <span ng-show="model.movie.llikes.indexOf(currentUser._id) > -1"
+                                  class="glyphicon glyphicon-star"></span>
+                            <span ng-show="!movel.move.llikes.indexOf(currentUser._id) > -1"
+                                  class="glyphicon glyphicon-star-empty">Like</span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Not Interesting</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- fim Modal-->
+

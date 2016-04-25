@@ -44,14 +44,6 @@
                 }
             })
 
-            .when("/details/:imdbID", {
-                templateUrl: "views/details/details.html",
-                controller: "DetailsController",
-                controllerAs: "model",
-                resolve: {
-                    checkLoggedin: checkLoggedin
-                }
-            })
 
             .when("/favorite", {
                 templateUrl: "views/favorite/favorite.html"

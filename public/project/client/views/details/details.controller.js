@@ -19,7 +19,7 @@
 
         function init() {
             OmdbService
-                .findMovieByImdbID (imdbID)
+                .findMovieByImdbID (movie.imdbID)
                 .then(function(response){
                     vm.data = response.data;
                 });

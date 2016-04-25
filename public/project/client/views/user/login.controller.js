@@ -25,6 +25,9 @@
                             $('#loginModal').modal('hide');
                             $location.url("/profile");
                         }
+                    else{
+                            shakeModal();
+                        }
                     });
 
         }

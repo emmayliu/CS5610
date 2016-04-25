@@ -12,6 +12,8 @@
         var vm = this;
 
         vm.search = search;
+        vm.favorite = favorite;
+        vm.getMovieDetails = getMovieDetails;
 
         function init() {
 
@@ -23,6 +25,31 @@
                 .searchMovieByTitle(movie.title)
                 .then(function(response){
                     vm.data = response.data;
+                });
+        }
+
+        function favorite(movie) {
+            if(currentUser) {
+                vm.movie.likes = [];
+                vm.movie.likes.push(currentUser._id);
+                MovieService
+                    .userLikesMovie(currentUser._id, movie);
+            } else {
+                $location.url("/login");
+            }
+        }
+
+        function getMovieDetails(movie) {
+            OmdbService
+                .findMovieByImdbID (movie.imdbID)
+                .then(function(response){
+                    vm.data = response.data;
+                });
+
+            MovieService
+                .findUserLikes (imdbID)
+                .then(function(response){
+                    vm.movie = response.data;
                 });
         }
     }
