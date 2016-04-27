@@ -47,6 +47,7 @@
 
             .when("/favorite", {
                 templateUrl: "views/favorite/favorite.html"
+
             })
 
             .when("/following", {

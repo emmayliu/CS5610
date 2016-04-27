@@ -19,7 +19,8 @@ module.exports = function (mongoose) {
         deleteUser: deleteUser,
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        findUsersByIds: findUsersByIds
     };
     return api;
 
@@ -219,6 +220,21 @@ module.exports = function (mongoose) {
         return deferred;
     }
 
+    function findUsersByIds (userIds) {
+        var deferred = q.defer();
+
+        UserModel.find({
+            _id: {$in: userIds}
+        }, function (err, users) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
+            }
+        });
+
+        return deferred.promise;
+    }
 
 
     function findUserByCredentials(credentials) {

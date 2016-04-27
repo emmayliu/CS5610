@@ -8,8 +8,9 @@
 
     // Scroll to appropriate position based on image index and width
 
-    function searchController(OmdbService) {
+    function searchController(OmdbService, MovieService, $rootScope, $location) {
         var vm = this;
+        var currentUser = $rootScope.currentUser;
 
         vm.search = search;
         vm.favorite = favorite;
@@ -49,7 +50,7 @@
                 });
 
             MovieService
-                .findUserLikes (imdbID)
+                .findUserLikes (movie.imdbID)
                 .then(function(response){
                     vm.movie = response.data;
                 });

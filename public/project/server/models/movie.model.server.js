@@ -6,10 +6,10 @@ var q = require("q");
 // pass db and mongoose reference to model
 module.exports = function(db, mongoose) {
 
-    // load movie schema from movie model
+
     var MovieSchema = require("./movie.schema.server.js")(mongoose);
 
-    // create movie from schema
+
     var Movie  = mongoose.model("Movie", MovieSchema);
 
     var movies = [];
@@ -25,7 +25,6 @@ module.exports = function(db, mongoose) {
 
         var deferred = q.defer();
 
-        // find the movie by imdb ID
         Movie.findOne({imdbID: movie.imdbID},
 
             function (err, doc) {
@@ -98,7 +97,8 @@ module.exports = function(db, mongoose) {
             imdbID: movie.imdbID,
             poster: movie.Poster,
             title: movie.Title,
-            likes: []
+            likes: [],
+
         });
 
         var deferred = q.defer();

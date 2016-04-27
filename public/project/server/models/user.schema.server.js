@@ -16,7 +16,7 @@ module.exports = function (mongoose) {
         lastName: String,
         email: String,
         roles: [String],
-        likes: {type: [MovieSchema], default: []},
+        likes: [String],
         reviews: {type: [ReviewSchema], default: []},
         following: {type: [FollowSchema], default: []},
         followers: {type: [FollowSchema], default: []}

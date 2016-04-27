@@ -3,15 +3,13 @@
  */
 module.exports = function (mongoose) {
     var MovieSchema = new mongoose.Schema({
-        Id: Number,
-        Name: String,
-        Year: Number,
-        ImageUrl: String,
-        Rating: Number,
-        Description: String,
-        Director: String,
-        Actors: String,
-        Genre: String
+        imdbID: String,
+        title: String,
+        poster: String,
+        likes: [String],
+        userLikes: [
+            {username: String}
+        ],
     }, {collection: "project.movie"});
     return MovieSchema;
 }
