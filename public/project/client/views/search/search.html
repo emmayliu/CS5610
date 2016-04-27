@@ -47,7 +47,8 @@
                             <span ng-show="!model.movie || !model.movie.likes || model.movie.likes.indexOf(currentUser._id) == -1"
                                   class="glyphicon glyphicon-star-empty"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-primary">More Details</button>
+                        <input class="btn btn-default btn-primary" type="submit" value="More Details"
+                               ng-click="model.getMoreDetails(movie)">
                     </div>
                 </div>
             </div>

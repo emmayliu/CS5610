@@ -43,6 +43,17 @@
                     loggedin: checkAdmin
                 }
             })
+            .when("/details/:imdbID", {
+                templateUrl: "views/movie/movie.html",
+                controller: "DetailsController",
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: checkLoggedin
+                }
+            })
+            .otherwise({
+                redirectTo: "/home"
+            })
 
 
             .when("/favorite", {

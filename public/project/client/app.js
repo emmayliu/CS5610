@@ -4,5 +4,8 @@
 "use strict";
 (function(){
     angular
-        .module("MovieApp", ["ngRoute"]);
+        .module("MovieApp", ["ngRoute"]).run(function ($rootScope, $uibModalStack) {
+        $uibModalStack.dismissAll();
+
+    });
 })();

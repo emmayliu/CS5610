@@ -21,18 +21,19 @@
         function init() {
 
         }
+
         init();
 
         function search(movie) {
             OmdbService
                 .searchMovieByTitle(movie.title)
-                .then(function(response){
+                .then(function (response) {
                     vm.data = response.data;
                 });
         }
 
         function favorite(movie) {
-            if(currentUser) {
+            if (currentUser) {
                 vm.movie.likes = [];
                 vm.movie.likes.push(currentUser._id);
                 MovieService
@@ -42,18 +43,19 @@
             }
         }
 
+
         function getMovieDetails(movie) {
             OmdbService
-                .findMovieByImdbID (movie.imdbID)
-                .then(function(response){
+                .findMovieByImdbID(movie.imdbID)
+                .then(function (response) {
                     vm.details = response.data;
                 });
-
             MovieService
-                .findUserLikes (movie.imdbID)
-                .then(function(response){
+                .findUserLikes(movie.imdbID)
+                .then(function (response) {
                     vm.movie = response.data;
                 });
         }
     }
+
 })();

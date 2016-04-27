@@ -3,9 +3,8 @@
 /* Padding below the footer and lighter body text */
 
 body {
-    background-color: #e3e3e3;
+    background-color: darkgrey;
     padding-bottom: 40px;
-    color: #5a5a5a;
 }
 
 
@@ -150,7 +149,7 @@ body {
 }
 
 .floatright {
-    width: 80%;
+    width: 60%;
 }
 
 

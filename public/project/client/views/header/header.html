@@ -50,10 +50,19 @@
                             </ul>
                         </li>
 
+
                         <li ng-show="currentUser.roles.indexOf('admin') >=0"
                             ng-class="{'active': $location.url() == '/admin'}">
                             <a href ="#/admin">Admin</a>
                         </li>
+
+                        <li ng-hide="currentUser">
+                            <a data-toggle="modal" href="javascript:void(0)"
+                               onclick="openRegisterModal();">
+                                <span class="glyphicon glyphicon-film"></span>
+                                Register</a>
+                        </li>
+
 
                         <li ng-hide="currentUser">
                             <a data-toggle="modal" href="javascript:void(0)"
