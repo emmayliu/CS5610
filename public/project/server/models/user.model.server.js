@@ -195,13 +195,12 @@ module.exports = function (mongoose) {
         // find the user
         UserModel.findById(userId, function (err, doc) {
 
-            // reject promise if error
             if (err) {
                 deferred.reject(err);
             } else {
 
                 // add movie id to user likes
-                doc.likes.push (movie.imdbID);
+                doc.likes.push (movie);
 
                 // save user
                 doc.save (function (err, doc) {
