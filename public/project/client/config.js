@@ -57,7 +57,9 @@
 
 
             .when("/favorite", {
-                templateUrl: "views/favorite/favorite.html"
+                templateUrl: "views/favorite/favorite.html",
+                controller: "FavoriteController",
+                controllerAs: "model"
 
             })
 

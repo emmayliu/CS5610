@@ -18,6 +18,7 @@
         vm.directDetails = directDetails;
         vm.details = null;
         vm.movie = null;
+        vm.message = null;
 
         function init() {
 

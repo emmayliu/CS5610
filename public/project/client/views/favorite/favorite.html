@@ -19,7 +19,7 @@
                         </thead>
 
                         <tbody>
-                        <tr ng-repeat="movie in currentUser.likes">
+                        <tr ng-repeat="movie in currentUser.likes" class="ng-scope">
                             <td>
                                 <img ng-src="{{movie.poster}}" height="100px"/>
                             </td>
@@ -30,7 +30,9 @@
                                 {{movie.imdbID}}
                             </td>
                             <td>
-
+                                <a ng-click="model.dislike($index)">
+                                <span class="glyphicon glyphicon-thumbs-down"></span>
+                                </a>
                             </td>
                             </tr>
                         </tr>

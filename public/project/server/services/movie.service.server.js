@@ -4,6 +4,7 @@
 module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/user/:userId/details/:imdbID", userLikesMovie);
     app.get("/api/project/details/:imdbID/user", findUserLikes);
+    app.delete("/api/project/user/:userId/movie/:imdbID", dislikeMovie);
 
     function findUserLikes (req, res) {
         var imdbID = req.params.imdbID;
@@ -62,4 +63,32 @@ module.exports = function(app, movieModel, userModel) {
                 }
             );
     }
-}
+
+    function dislikeMovie(req, res){
+        var imdbID = req.params.imdbID;
+        var userId = req.params.userId;
+        var movie;
+
+
+        movieModel
+            .userDislikeMovie(userId, imdbID)
+            .then(
+                function (movie) {
+                    return userModel.userDislikeMovie(userId, movie);
+
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+
+                }
+            );
+    }
+};

@@ -17,7 +17,8 @@ module.exports = function(db, mongoose) {
         findMovieByImdbID: findMovieByImdbID,
         findMoviesByImdbIDs: findMoviesByImdbIDs,
         createMovie: createMovie,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        userDislikeMovie: userDislikeMovie
     };
     return api;
 
@@ -86,7 +87,7 @@ module.exports = function(db, mongoose) {
             } else {
                 deferred.resolve(movies);
             }
-        })
+        });
         return deferred.promise;
     }
 
@@ -133,4 +134,30 @@ module.exports = function(db, mongoose) {
 
         return deferred.promise;
     }
-}
+
+    function userDislikeMovie(userId, imdbID) {
+        var deferred = q.defer();
+
+        Movie.findOne({imdbID: imdbID},
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+
+                if(doc) {
+                    
+                    var index = doc.likes.indexOf(userId);
+                    doc.likes.splice(index, 1);
+
+                    doc.save(function(err, doc){
+                        if(err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
+    }
+};

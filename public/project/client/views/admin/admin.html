@@ -1,11 +1,12 @@
 <div ng-controller="AdminController">
-<div class="container" style="padding-top: 20px; padding-left: 20px">
-    <h2 class="page-header">Admin: Manage Users </h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-responsive">
+<div class="container" style="padding-top: 20px; padding-left: 15px; border-bottom: none">
+    <div class="panel panel-primary" style="padding-top: 30px; background:whitesmoke">
+    <div class="panel-heading">Admin: Manage Users </div>
+    <div>
+        <table class="table table-bordered table-responsive table-striped">
             <thead>
             <tr>
-                <th nowrap>
+                <th>
                       <span ng-show="model.sortedByUsername != null && !sortReverse"
                             class="glyphicon glyphicon-triangle-bottom"></span>
                            <span ng-show="model.sortedByUsername != null && sortReverse"
@@ -19,14 +20,14 @@
                     </div>
                 </th>
 
-                <th nowrap> Password
+                <th> Password
                     <div>
                         <input ng-model="model.newUser.password" type="password" class="form-control"
                                id="inputPassword" placeholder="password" value="{{model.user.password}}">
                     </div>
                 </th>
 
-                <th nowrap>
+                <th>
                        <span ng-show="model.sortedByFirstName != null && !sortReverse"
                              class="glyphicon glyphicon-triangle-bottom"></span>
                            <span ng-show="model.sortedByFirstName != null && sortReverse"
@@ -39,7 +40,7 @@
                                id="inputFirstName" placeholder="First Name">
                     </div>
                 </th>
-                <th nowrap>
+                <th>
                        <span ng-show="model.sortedByLastName != null && !sortReverse"
                              class="glyphicon glyphicon-triangle-bottom"></span>
                            <span ng-show="model.sortedByLastName != null && sortReverse"
@@ -52,13 +53,13 @@
                                placeholder="Last Name">
                     </div>
                 </th>
-                <th nowrap>Role
+                <th>Role
                     <div>
                         <input ng-model="model.newUser.roles" type="text" class="form-control" id="inputRole"
                                placeholder="Roles">
                     </div>
                 </th>
-                <th nowrap>
+                <th>
                     <!--<div class="col-sm-1">Actions</div>-->
                     Actions
                     <div>
@@ -94,5 +95,6 @@
             </tbody>
         </table>
     </div>
+        </div>
     </div>
 </div>

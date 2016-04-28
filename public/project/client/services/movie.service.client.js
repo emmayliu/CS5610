@@ -9,7 +9,8 @@
     function movieService($http) {
         var api = {
             userLikesMovie: userLikesMovie,
-            findUserLikes: findUserLikes
+            findUserLikes: findUserLikes,
+            dislikeMovie: dislikeMovie
         };
         return api;
 
@@ -19,6 +20,11 @@
 
         function userLikesMovie(userId, movie) {
             return $http.post("/api/project/user/"+userId+"/details/"+movie.imdbID, movie);
+        }
+
+        function dislikeMovie(userId, movie) {
+            return $http.delete("/api/project/user/"+userId+"/movie/"+movie.imdbID, movie);
+
         }
     }
 })();

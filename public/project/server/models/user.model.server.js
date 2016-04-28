@@ -21,7 +21,8 @@ module.exports = function (mongoose) {
         findUserByUsername: findUserByUsername,
         userLikesMovie: userLikesMovie,
         findUsersByIds: findUsersByIds,
-        findUser: findUser
+        findUser: findUser,
+        userDislikeMovie: userDislikeMovie
     };
     return api;
 
@@ -282,5 +283,26 @@ module.exports = function (mongoose) {
             }
         });
         return deferred.promise;
+    }
+
+    function userDislikeMovie(userId, movie) {
+        var deferred = q.defer();
+
+        UserModel.findById(userId, function(err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                var index = doc.likes.indexOf(movie);
+                doc.likes.splice(index, 1);
+
+                doc.save(function (err, doc) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc);
+                    }
+                });
+            }
+        });
     }
 };
