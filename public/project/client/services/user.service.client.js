@@ -67,7 +67,7 @@
         }
 
         function updateUserAdmin(userId, user) {
-            $http.put("/api/project/admin/user/" + userId, user);
+           return $http.put("/api/project/admin/user/" + userId, user);
         }
 
 

@@ -215,6 +215,9 @@ module.exports = function(app, userModel, passport, LocalStrategy){
         var userId = req.params.userId;
         var newUser = req.body;
 
+        if(typeof newUser.roles == "string") {
+            newUser.roles = newUser.roles.split(",");
+        }
 
         userModel
             .findUserById(userId)
@@ -225,8 +228,8 @@ module.exports = function(app, userModel, passport, LocalStrategy){
                 userModel
                     .updateUserById(userId, newUser)
                     .then(
-                        function(user) {
-                            res.json(user);
+                        function(doc) {
+                            res.json(doc);
                         },
                         function(err) {
                             res.status(400).send(err);

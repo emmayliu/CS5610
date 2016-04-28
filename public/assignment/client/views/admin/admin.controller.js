@@ -19,8 +19,10 @@
         vm.sortedByUsername = null;
         vm.sortedByFirstName = null;
         vm.sortedByLastName = null;
+        vm.getText = getText;
 
         vm.users = [];
+
         function init() {
             UserService
                 .findAllUsers()
@@ -51,6 +53,10 @@
             return rolesStr;
         }
 
+        function getText(roles) {
+            return roles.toString();
+        }
+
 
         function stringToRoles(rStr) {
             return rStr.split(',');
@@ -60,7 +66,11 @@
             if (vm.newUser._id != null) {
                 UserService
                     .updateUserAdmin(vm.newUser._id, vm.newUser)
-                    .then(init);
+                    .then(function (response) {
+                        vm.newUser = response.data;
+                        vm.newUser = {};
+                        init();
+                    });
             }
         }
 

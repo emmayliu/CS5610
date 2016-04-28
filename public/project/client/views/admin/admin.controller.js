@@ -71,11 +71,11 @@
                 UserService
                     .updateUserAdmin(model.newUser._id, model.newUser)
                     .then(function (response) {
-                        model.users = response.data;
+                        model.newUser = response.data;
                         model.newUser = {};
+                        init();
                     });
             }
-            init();
         }
 
         function deleteUser(index) {

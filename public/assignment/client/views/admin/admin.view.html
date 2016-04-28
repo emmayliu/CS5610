@@ -67,7 +67,7 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
 
-                        <a ng-click = "model.updateUser(model.newUser)" class="btn btn-success btn-sm">
+                        <a ng-click = "model.updateUser()" class="btn btn-success btn-sm">
                             <span class="glyphicon glyphicon-ok"></span>
                         </a>
 
@@ -81,7 +81,7 @@
                 <td></td>
                 <td class="td-text">{{u.firstName}}</td>
                 <td class="td-text">{{u.lastName}}</td>
-                <td class="td-text">{{model.rolesToString(u.roles)}}</td>
+                <td class="td-text">{{model.getText(u.roles)}}</td>
                 <td>
                     <a ng-click="model.deleteUser($index)" class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove"></span>

@@ -219,6 +219,10 @@ module.exports = function(app, userModel, passport, LocalStrategy){
           newUser.emails[e] = newUser.emails[e].trim();
         }
 
+        if(typeof newUser.roles == "string") {
+            newUser.roles = newUser.roles.split(",");
+        }
+
         userModel
             .findUserById(userId)
             .then(function (user) {
