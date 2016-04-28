@@ -9,7 +9,8 @@
     function omdbService($http) {
         var api = {
             searchMovieByTitle: searchMovieByTitle,
-            findMovieByImdbID: findMovieByImdbID
+            findMovieByImdbID: findMovieByImdbID,
+            findMovieFullPlot: findMovieFullPlot
         };
         return api;
 
@@ -19,6 +20,10 @@
 
         function searchMovieByTitle(title) {
             return $http.jsonp("http://www.omdbapi.com/?s="+title+"&callback=JSON_CALLBACK");
+        }
+
+        function findMovieFullPlot(imdbID) {
+            return $http.jsonp("http://www.omdbapi.com/?i="+imdbID+"&plot=full&callback=JSON_CALLBACK");
         }
     }
 })();

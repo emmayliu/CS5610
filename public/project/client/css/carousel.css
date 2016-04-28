@@ -3,7 +3,7 @@
 /* Padding below the footer and lighter body text */
 
 body {
-    background-color: darkgrey;
+    background-color: #f2ece2;
     padding-bottom: 40px;
 }
 
@@ -163,4 +163,9 @@ ul.fullsizelist{
 
 .thumb {
     margin-bottom: 30px;
+}
+
+
+.list-group {
+    color: darkgrey;
 }

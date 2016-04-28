@@ -1,41 +1,61 @@
 <div class=container style="padding-top: 40px">
+    <div class="col-sm-12" style="padding-top: 20px">
+            <h3>{{model.data.Title}}</h3>
+        </div>
+    <div>
+    <div class="col-sm-4" style="padding-top: 20px">
+            <img ng-src="{{model.data.Poster}}" height="400px"/>
+        </div>
 
-    <h3>{{model.data.Title}}</h3>
-
-    <img ng-src="{{model.data.Poster}}"
-         height="200px"/>
-
-    <br/>
-    <br/>
-
-    <button class="btn btn-primary"
-            ng-click="model.favorite(model.data)">
-    <span ng-show="model.movie.likes.indexOf(currentUser._id) > -1"
-          class="glyphicon glyphicon-star"></span>
-    <span ng-show="!model.movie || !model.movie.likes || model.movie.likes.indexOf(currentUser._id) == -1"
-          class="glyphicon glyphicon-star-empty"></span>
-    </button>
-
-    <h4>Plot</h4>
-    <p>
-        {{model.data.Plot}}
-    </p>
-
-    <h4>Actors</h4>
-    <ul>
-        <li ng-repeat="actor in model.data.Actors.split(',')">
-            {{actor}}
-        </li>
-    </ul>
-
-    <div ng-if="model.movie.userLikes">
-        <h4>Other Users that Like This Movie</h4>
-        <ul>
-            <li ng-repeat="user in model.movie.userLikes">
-                <a href="#/profile/{{user.username}}">
-                    {{user.username}}
+        <div class="col-sm-6" style="padding-top: 20px">
+            <div class="list-group">
+                <a class="list-group-item">
+                <span class="glyphicon glyphicon-king"> Director: {{model.data.Director}}</span>
                 </a>
-            </li>
-        </ul>
+                <a class="list-group-item">
+                    <span class="glyphicon glyphicon-calendar"> Year: {{model.data.Year}}</span>
+                </a>
+                <a class="list-group-item">
+                    <span class="glyphicon glyphicon-sunglasses"> Rated: {{model.data.Rated}}</span>
+                </a>
+                <a class="list-group-item">
+                    <span class="glyphicon glyphicon-apple"> Rating: {{model.data.imdbRating}}</span>
+                </a>
+
+                <a class="list-group-item">
+                    <p><span class="glyphicon glyphicon-flag"> Genre: {{model.data.Genre}}</span></p>
+                </a>
+
+
+                <a class="list-group-item">
+                    <div>
+                        <span class="glyphicon glyphicon-user"> Actors</span>
+                        <ul>
+                            <li ng-repeat="actor in model.data.Actors.split(',')">{{actor}}</li>
+
+                        </ul>
+                    </div>
+                </a>
+
+                <a>
+                    <div ng-if="model.movie.userLikes">
+                        <h4>Users Who Like This Movie</h4>
+                        <ul>
+                            <li ng-repeat="user in model.movie.userLikes">
+                                <a href="#/profile/{{user.username}}">
+                                    {{user.username}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        </div>
+    <div class="col-sm-12" style="padding-top: 30px">
+        <h4>Full Plot</h4>
+        <p>{{model.data.Plot}}</p>
     </div>
+
 </div>
