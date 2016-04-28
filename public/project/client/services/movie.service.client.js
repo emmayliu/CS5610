@@ -14,11 +14,11 @@
         return api;
 
         function findUserLikes (imdbID) {
-            return $http.get("/api/project/movie/"+imdbID+"/user");
+            return $http.get("/api/project/details/"+imdbID+"/user");
         }
 
         function userLikesMovie(userId, movie) {
-            return $http.post("/api/project/user/"+userId+"/movie/"+movie.imdbID, movie);
+            return $http.post("/api/project/user/"+userId+"/details/"+movie.imdbID, movie);
         }
     }
 })();

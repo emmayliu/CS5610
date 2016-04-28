@@ -199,7 +199,7 @@ module.exports = function (mongoose) {
                 deferred.reject(err);
             } else {
 
-                // add movie id to user likes
+                // add details id to user likes
                 doc.likes.push (movie);
 
                 // save user

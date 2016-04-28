@@ -44,12 +44,9 @@
                 }
             })
             .when("/details/:imdbID", {
-                templateUrl: "views/movie/movie.html",
+                templateUrl: "views/details/details.html",
                 controller: "DetailsController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn: checkLoggedin
-                }
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"

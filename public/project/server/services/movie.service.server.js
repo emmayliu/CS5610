@@ -2,8 +2,8 @@
  * Created by emma on 4/20/16.
  */
 module.exports = function(app, movieModel, userModel) {
-    app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
-    app.get("/api/project/movie/:imdbID/user", findUserLikes);
+    app.post("/api/project/user/:userId/details/:imdbID", userLikesMovie);
+    app.get("/api/project/details/:imdbID/user", findUserLikes);
 
     function findUserLikes (req, res) {
         var imdbID = req.params.imdbID;
@@ -43,7 +43,7 @@ module.exports = function(app, movieModel, userModel) {
 
         movieModel
             .userLikesMovie(userId, movieOmdb)
-            // add user to movie likes
+            // add user to details likes
             .then(
                 function (movie) {
                     return userModel.userLikesMovie(userId, movie);
@@ -52,7 +52,7 @@ module.exports = function(app, movieModel, userModel) {
                     res.status(400).send(err);
                 }
             )
-            // add movie to user likes
+            // add details to user likes
             .then(
                 function (user) {
                     res.json(user);

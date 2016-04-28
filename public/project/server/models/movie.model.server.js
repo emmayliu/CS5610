@@ -34,7 +34,7 @@ module.exports = function(db, mongoose) {
                     deferred.reject(err);
                 }
 
-                // if there's a movie
+                // if there's a details
                 if (doc) {
                     // add user to likes
                     doc.likes.push (userId);
@@ -47,7 +47,7 @@ module.exports = function(db, mongoose) {
                         }
                     });
                 } else {
-                    // if there's no movie
+                    // if there's no details
                     // create a new instance
                     movie = new Movie({
                         imdbID: movie.imdbID,
@@ -92,7 +92,7 @@ module.exports = function(db, mongoose) {
 
     function createMovie(movie) {
 
-        // create instance of movie
+        // create instance of details
         var movie = new Movie({
             imdbID: movie.imdbID,
             poster: movie.Poster,
@@ -103,7 +103,7 @@ module.exports = function(db, mongoose) {
 
         var deferred = q.defer();
 
-        // save movie to database
+        // save details to database
         movie.save(function (err, doc) {
 
             if (err) {

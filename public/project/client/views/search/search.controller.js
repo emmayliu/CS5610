@@ -15,6 +15,7 @@
         vm.search = search;
         vm.favorite = favorite;
         vm.getMovieDetails = getMovieDetails;
+        vm.directDetails = directDetails;
         vm.details = null;
         vm.movie = null;
 
@@ -55,6 +56,11 @@
                 .then(function (response) {
                     vm.movie = response.data;
                 });
+        }
+
+        function directDetails(movie) {
+            console.log(movie);
+            $location.url("/details/{{movie.imdbID}}");
         }
     }
 

@@ -47,8 +47,7 @@
                             <span ng-show="!model.movie || !model.movie.likes || model.movie.likes.indexOf(currentUser._id) == -1"
                                   class="glyphicon glyphicon-star-empty"></span>
                         </button>
-                        <input class="btn btn-default btn-primary" type="submit" value="More Details"
-                               ng-click="model.getMoreDetails(movie)">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
                     </div>
                 </div>
             </div>
@@ -66,8 +65,13 @@
                         <img class="img-responsive" ng-src="{{movie.Poster}}">
                         <div class="caption">
                             <a ng-click="model.getMovieDetails(movie)" data-toggle="modal" data-target="#detailsModal">
-                            <h4>{{movie.Title}}</h4>
+                            <h4>{{movie.Title}}
+                                <a href="#/details/{{movie.imdbID}}">
+                                <span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
+                            </h4>
+                            </a>
+
                         </div>
                     </div>
                 </div>
