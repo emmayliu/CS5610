@@ -29,29 +29,23 @@
 
                 <a class="list-group-item">
                     <div>
-                        <span class="glyphicon glyphicon-user"> Actors</span>
-                        <ul>
-                            <li ng-repeat="actor in model.data.Actors.split(',')">{{actor}}</li>
-
-                        </ul>
+                        <span class="glyphicon glyphicon-fire"> Popularity: {{model.numberOfLikes}}</span>
                     </div>
                 </a>
 
-                <a>
-                    <div ng-if="model.movie.userLikes">
-                        <h4>Users Who Like This Movie</h4>
-                        <ul>
-                            <li ng-repeat="user in model.movie.userLikes">
-                                <a href="#/profile/{{user.username}}">
-                                    {{user.username}}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <a class="list-group-item" ng-show="model.movie.likes.length > 0">
+                    <span class="glyphicon glyphicon-user"> Fans:
+                    <span ng-repeat="user in model.movie.userLikes">
+                             {{user.username}}
+                    </span>
+                        </span>
                 </a>
+
+
 
             </div>
         </div>
+
         </div>
     <div class="col-sm-12" style="padding-top: 30px">
         <h4>Full Plot</h4>

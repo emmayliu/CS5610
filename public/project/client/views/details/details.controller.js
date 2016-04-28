@@ -16,6 +16,7 @@
         var imdbID = $routeParams.imdbID;
         var currentUser = $rootScope.currentUser;
         vm.favorite = favorite;
+        vm.numberOfLikes = 0;
 
         function init() {
             OmdbService
@@ -28,6 +29,7 @@
                 .findUserLikes (imdbID)
                 .then(function(response){
                     vm.movie = response.data;
+                    vm.numberOfLikes = vm.movie.likes.length;
                 });
         }
         init();
