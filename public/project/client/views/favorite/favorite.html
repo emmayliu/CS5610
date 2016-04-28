@@ -21,13 +21,15 @@
                         <tbody>
                         <tr ng-repeat="movie in currentUser.likes" class="ng-scope">
                             <td>
+                                <a href="#/details/{{movie.imdbID}}">
                                 <img ng-src="{{movie.poster}}" height="100px"/>
+                                </a>
                             </td>
                             <td>
-                                {{movie.title}}
+                                <a href="#/details/{{movie.imdbID}}">{{movie.title}}</a>
                             </td>
                             <td>
-                                {{movie.imdbID}}
+                                <a href="#/details/{{movie.imdbID}}">{{movie.imdbID}}</a>
                             </td>
                             <td>
                                 <a ng-click="model.dislike($index)">

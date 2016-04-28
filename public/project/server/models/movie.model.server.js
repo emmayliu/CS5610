@@ -145,7 +145,7 @@ module.exports = function(db, mongoose) {
                 }
 
                 if(doc) {
-                    
+
                     var index = doc.likes.indexOf(userId);
                     doc.likes.splice(index, 1);
 
