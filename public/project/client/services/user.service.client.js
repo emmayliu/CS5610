@@ -67,13 +67,7 @@
         }
 
         function updateUserAdmin(userId, user) {
-            var deferred = $q.defer();
-            $http
-                .put("/api/project/admin/user/" + userId, user)
-                .then(function (response) {
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
+            $http.put("/api/project/admin/user/" + userId, user);
         }
 
 

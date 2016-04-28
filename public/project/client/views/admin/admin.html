@@ -62,13 +62,13 @@
                     <!--<div class="col-sm-1">Actions</div>-->
                     Actions
                     <div>
-                        <a ng-click = "model.addUser(model.newUser)" class="btn btn-primary btn-sm">
+                        <button ng-click = "model.addUser(model.newUser)" class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-plus"></span>
-                        </a>
+                        </button>
 
-                        <a ng-click = "model.updateUser(model.newUser)" class="btn btn-success btn-sm">
+                        <button ng-click = "model.updateUser()" type="button" class="btn btn-success btn-sm">
                             <span class="glyphicon glyphicon-ok"></span>
-                        </a>
+                        </button>
 
                     </div>
                 </th>
@@ -80,7 +80,7 @@
                 <td></td>
                 <td class="td-text">{{user.firstName}}</td>
                 <td class="td-text">{{user.lastName}}</td>
-                <td class="td-text">{{model.rolesToString(user.roles)}}</td>
+                <td class="td-text">{{model.getText(user.roles)}}</td>
                 <td>
                     <a ng-click="model.deleteUser($index)" class="btn btn-danger btn-sm">
                         <span class="glyphicon glyphicon-remove"></span>

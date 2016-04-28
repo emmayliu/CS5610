@@ -29,7 +29,10 @@
 
             })
             .when("/profile", {
-                templateUrl: "views/user/profile.html"
+                templateUrl: "views/user/profile.html",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
 
             .when("/review", {

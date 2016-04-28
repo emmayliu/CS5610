@@ -21,6 +21,7 @@
         model.sortedByUsername = null;
         model.sortedByFirstName = null;
         model.sortedByLastName = null;
+        model.getText = getText;
 
         model.users = [];
 
@@ -54,6 +55,12 @@
             return rolesStr;
         }
 
+        function getText(roles) {
+            return roles.toString();
+
+        }
+
+
 
         function stringToRoles(rStr) {
             return rStr.split(',');
@@ -63,8 +70,12 @@
             if (model.newUser._id != null) {
                 UserService
                     .updateUserAdmin(model.newUser._id, model.newUser)
-                    .then(init);
+                    .then(function (response) {
+                        model.users = response.data;
+                        model.newUser = {};
+                    });
             }
+            init();
         }
 
         function deleteUser(index) {
