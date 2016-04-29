@@ -70,7 +70,9 @@
             })
 
             .when("/follower", {
-                templateUrl: "views/user/follower.html"
+                templateUrl: "views/user/follower.html",
+                controller: "FollowerController",
+                controllerAs: "model"
             })
 
             .when("/review", {

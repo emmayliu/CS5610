@@ -25,7 +25,8 @@
             getCurrentUser: getCurrentUser,
 
             userFollowOtherUser: userFollowOtherUser,
-            userUnfollowOtherUser: userUnfollowOtherUser
+            userUnfollowOtherUser: userUnfollowOtherUser,
+            findUserData: findUserData
 
         };
 
@@ -131,6 +132,20 @@
                 });
             return deferred.promise;
         }
+
+
+        function findUserData(id) {
+            var deferred = $q.defer();
+
+            $http
+                .get("/api/project/user/" + id)
+                .then(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+
 
         function userFollowOtherUser(userId, following) {
             var deferred = $q.defer();

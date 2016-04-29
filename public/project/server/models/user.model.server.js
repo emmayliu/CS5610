@@ -277,7 +277,7 @@ module.exports = function (mongoose) {
             }
 
                 UserModel.findById(otherUser._id, function(err, alt) {
-                    alt.followers.push(doc._id);
+                    alt.followers.push(doc);
                     alt.save(function (err, alt) {
                         deferred.resolve(alt);
 

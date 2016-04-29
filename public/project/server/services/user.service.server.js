@@ -85,6 +85,8 @@ module.exports = function(app, userModel, passport, LocalStrategy) {
         }
     }
 
+
+
     function all(req, res) {
         userModel.findAllUsers()
             .then(
@@ -143,6 +145,7 @@ module.exports = function(app, userModel, passport, LocalStrategy) {
                 }
             );
     }
+
 
     function register(req, res) {
         var newUser = req.body;
@@ -337,4 +340,4 @@ module.exports = function(app, userModel, passport, LocalStrategy) {
                 }
             );
     }
-}
+};
