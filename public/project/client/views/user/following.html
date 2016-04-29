@@ -5,9 +5,9 @@
         <div class="floatright">
             <div class="container-fluid">
                 <h1>Following</h1>
-                <li ng-repeat = "f in model.following">
-                    <a>{{f.username}}</a>
-                </li>
+                <div ng-repeat = "f in model.following">
+                    <a><span class="glyphicon glyphicon-user"> {{f.username}}</span></a>
+                </div>
                 <br>
                 <br>
             </div>
