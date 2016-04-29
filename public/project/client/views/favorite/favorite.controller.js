@@ -28,7 +28,6 @@
         init();
 
         function dislike(index) {
-            console.log("deleting from controller");
             var MovieToDelete = vm.likes[index];
             vm.likes.splice(index, 1);
             MovieService.

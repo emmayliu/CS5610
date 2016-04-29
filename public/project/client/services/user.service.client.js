@@ -14,6 +14,7 @@
             login: login,
             findUserById: findUserById,
             findAllUsers: findAllUsers,
+            findAll: findAll,
             register: register,
             logout: logout,
             createUser: createUser,
@@ -21,7 +22,10 @@
             updateUser: updateUser,
             updateUserAdmin: updateUserAdmin,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+
+            userFollowOtherUser: userFollowOtherUser,
+            userUnfollowOtherUser: userUnfollowOtherUser
 
         };
 
@@ -71,6 +75,15 @@
         }
 
 
+        function findAll() {
+            var deferred = $q.defer();
+            $http
+                .get("/api/project/user")
+                .then(function(response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
 
         function findAllUsers() {
             var deferred = $q.defer();
@@ -122,6 +135,21 @@
                     deferred.resolve(response);
                 });
             return deferred.promise;
+        }
+
+        function userFollowOtherUser(userId, following) {
+            var deferred = $q.defer();
+            $http
+                .post("/api/project/user/"+userId+"/following/", following)
+                .then(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+        function userUnfollowOtherUser(userId, otherUser) {
+            return $http
+                .delete ("/api/project/user/"+userId+"/otherUser/"+otherUser._id, otherUser);
         }
 
 

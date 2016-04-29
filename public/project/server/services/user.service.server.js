@@ -19,6 +19,11 @@ module.exports = function(app, userModel, passport, LocalStrategy){
     app.get("/api/project/admin/user", admin, getUser);
     app.delete("/api/project/admin/user/:userId", admin, deleteUser);
     app.put("/api/project/admin/user/:userId", admin, updateUserAdmin);
+    app.get("/api/project/user", getAllUsers);
+
+
+    app.post("/api/project/user/:userId/following", userfollowOtherUser);
+    app.delete("/api/project/user/:userId/otherUser/:otherUserId", userUnfollowOtherUser);
 
 
    passport.use(new LocalStrategy(localStrategy));
@@ -91,6 +96,31 @@ module.exports = function(app, userModel, passport, LocalStrategy){
                 }
             );
     }
+
+
+    function getAllUsers(req, res) {
+        var uid = req.query.userId;
+        if (uid != null) {
+            findUserById(req, res);
+        } else {
+            all(req, res);
+        }
+    }
+
+    function all(req, res) {
+        userModel.findAllUsers()
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+
+
 
     function profile(req, res) {
         var id = req.params.id;
@@ -267,5 +297,45 @@ module.exports = function(app, userModel, passport, LocalStrategy){
         } else {
             next();
         }
+    }
+
+    function userfollowOtherUser(req, res) {
+        var userId = req.params.userId;
+        var otherUser = req.body;
+
+        userModel
+            .addFollower(userId, otherUser)
+            .then(function (result) {
+                res.json(result);
+            });
+
+    }
+
+    function userUnfollowOtherUser(req, res) {
+        var userId = req.params.userId;
+        var otherUser = req.body;
+        var otherUserId = otherUser._id;
+
+        console.log(otherUser);
+        console.log(userId);
+
+        userModel
+            .userUnfollowOtherUser(userId, otherUser)
+            .then(
+                function (otherUser) {
+                    return userModel.deleteFollower(userId, otherUser);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 };

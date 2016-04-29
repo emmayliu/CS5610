@@ -64,7 +64,9 @@
             })
 
             .when("/following", {
-                templateUrl: "views/user/following.html"
+                templateUrl: "views/user/following.html",
+                controller: "FollowController",
+                controllerAs: "model"
             })
 
             .when("/follower", {
