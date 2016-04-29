@@ -15,27 +15,29 @@
         vm.follow = follow;
         vm.unfollow = unfollow;
 
-        vm.following = [];
-        vm.followers = [];
+        vm.following = currentUser.following;
+        vm.followers = currentUser.followers;
         vm.followingIds = [];
         vm.users = [];
 
 
 
+
         function init() {
             if(currentUser) {
+                for(var f in vm.following) {
+                    vm.followingIds.push(vm.following[f]._id);
+                }
                 UserService
                     .findAll()
                     .then(function (response) {
                         vm.users = response.data;
                         for(var u in vm.users) {
-                            var i = vm.followingIds.indexOf(u._id);
-                            if(i > -1) {
-                                var index = vm.users.indexOf(u);
-                                vm.users.splice(index, 1);
+                            if(vm.followingIds.indexOf(vm.users[u]._id) > -1) {
+                                vm.users.splice(u, 1);
                             }
+                            console.log(vm.users);
                         }
-
 
                     });
             }

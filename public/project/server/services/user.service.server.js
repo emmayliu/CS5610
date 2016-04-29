@@ -19,7 +19,7 @@ module.exports = function(app, userModel, passport, LocalStrategy) {
     app.get("/api/project/admin/user", admin, getUser);
     app.delete("/api/project/admin/user/:userId", admin, deleteUser);
     app.put("/api/project/admin/user/:userId", admin, updateUserAdmin);
-    app.get("/api/project/user", auth, getAllUsers);
+    app.get("/api/project/user", getAllUsers);
 
 
     app.post("/api/project/user/:userId/following", userfollowOtherUser);
@@ -100,8 +100,14 @@ module.exports = function(app, userModel, passport, LocalStrategy) {
 
 
     function getAllUsers(req, res) {
-        all(req, res);
+        var uid = req.query.userId;
+        if (uid != null) {
+            findUserById(req, res);
+        } else {
+            all(req, res);
+        }
     }
+
 
 
 

@@ -76,13 +76,8 @@
 
 
         function findAll() {
-            var deferred = $q.defer();
-            $http
-                .get("/api/project/user")
-                .then(function(response) {
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
+            return $http.get("/api/project/user");
+
         }
 
         function findAllUsers() {
