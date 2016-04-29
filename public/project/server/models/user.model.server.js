@@ -273,8 +273,16 @@ module.exports = function (mongoose) {
                     } else {
                         deferred.resolve(doc);
                     }
-                });
+                })
             }
+
+                UserModel.findById(otherUser._id, function(err, alt) {
+                    alt.followers.push(doc._id);
+                    alt.save(function (err, alt) {
+                        deferred.resolve(alt);
+
+                    });
+                });
 
         });
         return deferred.promise;

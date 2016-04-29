@@ -1,8 +1,6 @@
 /**
- * Created by emma on 4/28/16.
+ * Created by emma on 4/29/16.
  */
-"use strict";
-
 (function () {
     angular
         .module("MovieApp")
@@ -51,11 +49,11 @@
 
             vm.followingIds.push(newFollowing._id);
             UserService
-                    .userFollowOtherUser(currentUser._id, newFollowing)
-                    .then(function(response){
-                        currentUser.following = response.data.following;
-                        vm.following = response.data.following;
-                    });
+                .userFollowOtherUser(currentUser._id, newFollowing)
+                .then(function(response){
+                    currentUser.following = response.data.following;
+                    vm.following = response.data.following;
+                });
             init();
         }
 
