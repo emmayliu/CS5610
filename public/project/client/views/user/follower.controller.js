@@ -11,11 +11,16 @@
         var currentUser = $rootScope.currentUser;
 
         vm.users = currentUser.followers;
+        vm.following = currentUser.following;
+        vm.followingIds = [];
         vm.follow = follow;
 
 
 
         function init() {
+            for(var f in vm.following) {
+                vm.followingIds.push(vm.following[f]._id);
+            }
 
         }
 

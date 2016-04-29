@@ -11,7 +11,7 @@
                     </a>
                     <div class="desc">
                         <h4>{{user.username}}
-                            <button ng-show ="model.currentUser.following.indexOf(user) == -1" class="btn btn-primary btn-sm">
+                            <button ng-show ="model.followingIds.indexOf(user._id) == -1" class="btn btn-primary btn-sm">
                                 <span ng-click="model.follow($index)"
                                       class="fa fa-user-plus fa-fw">
 
