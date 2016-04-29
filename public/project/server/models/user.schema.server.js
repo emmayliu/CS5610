@@ -19,8 +19,8 @@ module.exports = function (mongoose) {
         likes: {type: [MovieSchema], default: []},
         reviews: {type: [ReviewSchema], default: []},
         following: {type: [FollowSchema], default: []},
-        followers: {type: [FollowSchema], default: []}
-    }, {collection: "projectUser"});
+        followers: [{username: String}]
+    }, {collection: "project.user"});
 
     return UserSchema;
 };

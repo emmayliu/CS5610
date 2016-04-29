@@ -14,7 +14,8 @@
 
             <div class="container-fluid">
                 <h1>Suggest friends</h1>
-                <div class="img" ng-repeat="user in model.users" ng-if="user.username != currentUser.username">
+                <div ng-show="!model.following || !model.followers|| model.followingIds.indexOf(user._id) == -1"
+                     class="img" ng-repeat="user in model.users" ng-if="user.username != currentUser.username">
                         <a target="_blank">
                             <img src="http://lorempixel.com/200/200/people/9/" width="200" height="100">
                         </a>
@@ -23,7 +24,7 @@
                             <h4>{{user.username}}
                             <button class="btn btn-primary btn-sm">
                                 <span ng-click="model.follow($index)"
-                                      ng-show="!model.following || !model.follower || model.followingIds.indexOf(user._id) == -1" class="fa fa-user-plus fa-fw">
+                                       class="fa fa-user-plus fa-fw">
 
                                 </span>
                             </button>

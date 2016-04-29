@@ -8,6 +8,6 @@ module.exports = function (mongoose) {
         userId: String,
         content: String,
         time: Date
-    }, {collection: "movie.review"});
+    }, {collection: "project.review"});
     return ReviewSchema;
 }

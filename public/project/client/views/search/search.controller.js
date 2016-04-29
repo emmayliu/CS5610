@@ -60,7 +60,6 @@
         }
 
         function directDetails(movie) {
-            console.log(movie);
             $location.url("/details/{{movie.imdbID}}");
         }
     }

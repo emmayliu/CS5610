@@ -8,34 +8,35 @@
         .module("MovieApp")
         .controller("FollowController", FollowController);
 
-    function FollowController($rootScope, $location, UserService) {
+    function FollowController($rootScope, UserService) {
         var vm = this;
         var currentUser = $rootScope.currentUser;
-        vm.$location = $location;
+
         vm.follow = follow;
         vm.unfollow = unfollow;
-        vm.following = currentUser.following;
-        vm.follower = currentUser.followers;
+
+        vm.following = [];
+        vm.followers = [];
         vm.followingIds = [];
         vm.users = [];
 
 
 
         function init() {
-            for(var f in vm.following) {
-                vm.followingIds.push(f._id);
-                console.log(vm.followingIds);
-            }
             if(currentUser) {
                 UserService
                     .findAll()
-                    .then(function(response) {
+                    .then(function (response) {
                         vm.users = response.data;
                         for(var u in vm.users) {
-                            if(vm.following.indexOf(u) > -1) {
-                                vm.users.splice(u, 1);
+                            var i = vm.followingIds.indexOf(u._id);
+                            if(i > -1) {
+                                var index = vm.users.indexOf(u);
+                                vm.users.splice(index, 1);
                             }
                         }
+
+
                     });
             }
         }
@@ -44,13 +45,14 @@
 
         function follow(index) {
             var newFollowing = vm.users[index];
-            console.log(newFollowing);
             vm.users.splice(index, 1);
+
+            vm.followingIds.push(newFollowing._id);
             UserService
-                .userFollowOtherUser(currentUser._id, newFollowing)
-                .then(function (response) {
-                    vm.following = response.data;
-                });
+                    .userFollowOtherUser(currentUser._id, newFollowing)
+                    .then(function(response){
+                        vm.following = response.data.following;
+                    });
             init();
         }
 

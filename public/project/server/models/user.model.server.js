@@ -235,17 +235,39 @@ module.exports = function (mongoose) {
         return deferred;
     }
 
-    function userFollowOtherUser (userId, otherUser) {
+    function addFollower (userId, otherUser) {
 
+        var deferred = q.defer();
+
+        UserModel.findOne({_id: otherUser._id},
+            function(err, doc) {
+                if(err) {
+                    deferred.reject(err);
+                }
+                if(doc) {
+                    doc.follower.push(userId);
+                    doc.save(function(err, doc) {
+                        if(err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+        return deferred;
+    }
+
+    function userFollowOtherUser (userId, otherUser) {
         var deferred = q.defer();
 
         UserModel.findById(userId, function (err, doc) {
             if(err) {
                 deferred.reject(err);
             } else {
-                doc.following.push({id: otherUser._id, username: otherUser.username});
+                doc.following.push(otherUser);
 
-                doc.save (function (err, doc) {
+                doc.save(function (err, doc) {
                     if(err) {
                         deferred.reject(err);
                     } else {
@@ -253,7 +275,9 @@ module.exports = function (mongoose) {
                     }
                 });
             }
+
         });
+        return deferred.promise;
     }
 
 
@@ -357,32 +381,7 @@ module.exports = function (mongoose) {
         });
     }
 
-    function addFollower(userId, follower) {
-        var deferred = q.defer();
 
-        UserModel.findById(userId, function (err, user) {
-            if(err) {
-                deferred.reject(err);
-            } else {
-                console.log(user);
-                user.following.push(follower);
-                user.save(function (err, user) {
-                    deferred.resolve(user);
-
-                });
-
-                UserModel.findById(follower._id, function (err, doc) {
-                    doc.followers.push(user);
-                    doc.save(function(err, doc){
-                        deferred.resolve(doc);
-                    });
-
-                });
-            }
-
-        });
-        return deferred.promise;
-    }
 
 
     function deleteFollower(userId, otherUser) {

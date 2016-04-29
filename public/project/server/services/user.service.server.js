@@ -5,7 +5,7 @@
 var bcrypt = require("bcrypt-nodejs");
 
 
-module.exports = function(app, userModel, passport, LocalStrategy){
+module.exports = function(app, userModel, passport, LocalStrategy) {
     var auth = authorized;
     var admin = isAdmin;
 
@@ -19,16 +19,16 @@ module.exports = function(app, userModel, passport, LocalStrategy){
     app.get("/api/project/admin/user", admin, getUser);
     app.delete("/api/project/admin/user/:userId", admin, deleteUser);
     app.put("/api/project/admin/user/:userId", admin, updateUserAdmin);
-    app.get("/api/project/user", getAllUsers);
+    app.get("/api/project/user", auth, getAllUsers);
 
 
     app.post("/api/project/user/:userId/following", userfollowOtherUser);
     app.delete("/api/project/user/:userId/otherUser/:otherUserId", userUnfollowOtherUser);
 
 
-   passport.use(new LocalStrategy(localStrategy));
-   passport.serializeUser(serializeUser);
-   passport.deserializeUser(deserializeUser);
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
 
     // functions
     function localStrategy(username, password, done) {
@@ -38,7 +38,7 @@ module.exports = function(app, userModel, passport, LocalStrategy){
                 function (user) {
                     if (!user) {
                         return done(null, false);
-                    }else if(bcrypt.compareSync(password, user.password)){
+                    } else if (bcrypt.compareSync(password, user.password)) {
                         return done(null, user)
                     } else {
                         return done(null, false);
@@ -46,7 +46,7 @@ module.exports = function(app, userModel, passport, LocalStrategy){
 
                 },
 
-                function(err) {
+                function (err) {
                     if (err) {
                         return done(err);
                     }
@@ -98,26 +98,11 @@ module.exports = function(app, userModel, passport, LocalStrategy){
     }
 
 
+
     function getAllUsers(req, res) {
-        var uid = req.query.userId;
-        if (uid != null) {
-            findUserById(req, res);
-        } else {
-            all(req, res);
-        }
+        all(req, res);
     }
 
-    function all(req, res) {
-        userModel.findAllUsers()
-            .then(
-                function (doc) {
-                    res.json(doc);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
-    }
 
 
 
@@ -304,12 +289,20 @@ module.exports = function(app, userModel, passport, LocalStrategy){
         var otherUser = req.body;
 
         userModel
-            .addFollower(userId, otherUser)
-            .then(function (result) {
-                res.json(result);
-            });
+            .userFollowOtherUser(userId, otherUser)
+            .then(
+                function (doc) {
+                    res.json(doc);
 
+                },
+                function (err) {
+                    res.status(400).send(err);
+
+                }
+            );
     }
+
+
 
     function userUnfollowOtherUser(req, res) {
         var userId = req.params.userId;
@@ -338,4 +331,4 @@ module.exports = function(app, userModel, passport, LocalStrategy){
                 }
             );
     }
-};
+}

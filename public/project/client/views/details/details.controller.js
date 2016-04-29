@@ -17,6 +17,7 @@
         var currentUser = $rootScope.currentUser;
         vm.favorite = favorite;
         vm.numberOfLikes = 0;
+        vm.movie;
 
         function init() {
             OmdbService
