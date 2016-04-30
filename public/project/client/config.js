@@ -51,9 +51,7 @@
                 controller: "DetailsController",
                 controllerAs: "model"
             })
-            .otherwise({
-                redirectTo: "/home"
-            })
+
 
 
             .when("/favorite", {
@@ -76,7 +74,9 @@
             })
 
             .when("/review", {
-                templateUrl: "views/review/review.html"
+                templateUrl: "views/review/review.html",
+                controller: "ReviewController",
+                controllerAs: "model"
             })
 
             .otherwise({

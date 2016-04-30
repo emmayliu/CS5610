@@ -8,7 +8,8 @@ module.exports = function (mongoose) {
         imdbID: String,
         content: String,
         time: Date,
-        userId: String
+        userId: String,
+        title: String
     }, {collection: "project.review"});
     return ReviewSchema;
 };

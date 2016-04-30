@@ -20,33 +20,35 @@ module.exports = function (db, mongoose) {
     return api;
 
 
-    function userReviewMovie(userId,review) {
-        var deferred = q.defer();
+   function userReviewMovie (userId, review) {
+       var deferred = q.defer();
 
-        User.findOne({_id: userId},
-            function (err, doc) {
-                if (err) {
-                    deferred.reject(err);
-                }
+       User.findOne({_id: userId},
+           function (err, doc) {
+               if(err) {
+                   deferred.reject(err);
+               }
+               if(doc) {
+                   var newReview = new ReviewModel({
+                       imdbID: review.imdbID,
+                       content: review.content,
+                       userId: userId,
+                       time: Date.now(),
+                       title: review.title
+                   });
 
-                if (doc) {
-                    var newReview = new ReviewModel({
-                        imdbID: review.imdbID,
-                        content: review.content,
-                        userId: userId,
-                        time: Date.now()
-                    });
+                   doc.reviews.push(newReview);
 
-                    doc.reviews.push(newReview);
-                    doc.save(function (err, doc) {
-                        if (err) {
-                            deferred.reject(err);
-                        } else {
-                            deferred.resolve(doc);
-                        }
-                    });
-                }
-            });
-        return deferred.promise;
-    }
+                   doc.save (function (err, doc) {
+                       if(err) {
+                           deferred.reject(err);
+                       } else {
+                           deferred.resolve(doc);
+                       }
+                   });
+               }
+
+           });
+       return deferred;
+   }
 };

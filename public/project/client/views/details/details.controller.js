@@ -54,6 +54,7 @@
 
         function create() {
             var review = {};
+            review.title = vm.movie.title;
             review.imdbID = imdbID;
             review.user = currentUser;
             review.content = vm.content;

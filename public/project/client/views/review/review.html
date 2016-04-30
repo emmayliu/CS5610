@@ -1,3 +1,4 @@
+<div ng-controller="ReviewController">
 <link href="css/userRate.css" rel="stylesheet"/>
 <div>
     <div ng-include="'views/user/profile.html'"></div>
@@ -7,16 +8,17 @@
             <div class="row">
                 <div class="col-sm-8" style="padding-left: 30px; padding-top: 20px">
                     <h4>Reviews</h4>
-                    <div class="review-block" style="background-color: #d5d5d5">
+                    <div class="review-block" style="background-color: #d5d5d5" ng-repeat="review in model.reviews">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="http://lorempixel.com/200/200/people/9/" height="80px" class="img-rounded">
-                                <div class="review-block-name"><a href="#">bob</a></div>
-                                <div class="review-block-date">Janary 3, 2016</div>
+                                <img src="http://lorempixel.com/200/200/people/9/" height="80px"
+                                     class="img-rounded"/>
+                                <div class="review-block-name"><a href="#">{{currentUser.username}}</a></div>
+                                <div class="review-block-date">{{review.time}}</div>
                             </div>
                             <div class="col-sm-9">
-                                <div class="review-block-title">Nice day</div>
-                                <div class="review-block-description">It's is a nice movie</div>
+                                <div class="review-block-title">{{review.title}}</div>
+                                <div class="review-block-description">{{review.content}}</div>
                             </div>
                         </div>
                     </div>
@@ -24,4 +26,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

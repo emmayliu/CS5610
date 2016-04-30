@@ -36,7 +36,6 @@
                             if(vm.followingIds.indexOf(vm.users[u]._id) > -1) {
                                 vm.users.splice(u, 1);
                             }
-                            console.log(vm.users);
                         }
 
                     });

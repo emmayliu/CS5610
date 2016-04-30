@@ -8,7 +8,7 @@
         .module("MovieApp")
         .factory("ReviewService", ReviewService);
 
-    function ReviewService($http) {
+    function ReviewService($http, $q) {
 
         var api = {
             "createReview": createReview
@@ -17,9 +17,14 @@
         return api;
 
         function createReview(userId, review) {
+            var deferred = $q.defer();
 
-            return $http.post("/api/project/user/"+userId+"/review", review);
-
+            $http
+                .post("/api/project/user/"+userId+"/review/", review)
+                .then(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
         }
 
 
