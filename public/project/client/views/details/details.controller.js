@@ -19,6 +19,7 @@
         vm.favorite = favorite;
         vm.create = create;
         vm.numberOfLikes = 0;
+        vm.message = null;
         vm.movie;
         vm.reviews;
         vm.content;
@@ -59,6 +60,7 @@
             review.user = currentUser;
             review.content = vm.content;
             ReviewService.createReview(currentUser._id, review);
+            vm.message = "Thanks, Your review is saved!";
         }
     }
 

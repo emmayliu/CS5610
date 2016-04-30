@@ -59,7 +59,12 @@
             <textarea ng-model="model.content" placeholder="Write your reviews" style="width: 100%"></textarea>
         </div>
     <button ng-click="model.create()" class="btn btn-success">Submit</button>
+        <br>
+        <br>
+        <br>
+        <div ng-show="model.message" class="alert alert-success" role="alert">{{model.message}}</div>
     </div>
+
 
 
 
