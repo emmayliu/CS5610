@@ -99,6 +99,7 @@ module.exports = function(db, mongoose) {
             poster: movie.Poster,
             title: movie.Title,
             likes: [],
+            userLikes: []
 
         });
 

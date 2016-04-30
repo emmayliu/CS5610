@@ -1,3 +1,4 @@
+
 <div class=container style="padding-top: 40px">
     <div class="col-sm-12" style="padding-top: 20px">
             <h3>{{model.data.Title}}</h3>
@@ -51,5 +52,15 @@
         <h4>Full Plot</h4>
         <p>{{model.data.Plot}}</p>
     </div>
+
+
+    <div class="row col-sm-12">
+        <div class="col-lg-8 col-md-9">
+            <textarea ng-model="model.content" placeholder="Write your reviews" style="width: 100%"></textarea>
+        </div>
+    <button ng-click="model.create()" class="btn btn-success">Submit</button>
+    </div>
+
+
 
 </div>

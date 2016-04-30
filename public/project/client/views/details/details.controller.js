@@ -10,14 +10,18 @@
                                OmdbService,
                                $rootScope,
                                $location,
-                               MovieService
+                               MovieService,
+                               ReviewService
     ) {
         var vm = this;
         var imdbID = $routeParams.imdbID;
         var currentUser = $rootScope.currentUser;
         vm.favorite = favorite;
+        vm.create = create;
         vm.numberOfLikes = 0;
         vm.movie;
+        vm.reviews;
+        vm.content;
 
         function init() {
             OmdbService
@@ -32,6 +36,8 @@
                     vm.movie = response.data;
                     vm.numberOfLikes = vm.movie.likes.length;
                 });
+
+
         }
         init();
 
@@ -45,5 +51,14 @@
                 $location.url("/login");
             }
         }
+
+        function create() {
+            var review = {};
+            review.imdbID = imdbID;
+            review.user = currentUser;
+            review.content = vm.content;
+            ReviewService.createReview(currentUser._id, review);
+        }
     }
+
 })();

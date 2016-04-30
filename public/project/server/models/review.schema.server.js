@@ -1,13 +1,14 @@
 /**
  * Created by emma on 4/22/16.
  */
+
+"use strict";
 module.exports = function (mongoose) {
     var ReviewSchema = new mongoose.Schema({
-        id: String,
-        movieId: Number,
-        userId: String,
+        imdbID: String,
         content: String,
-        time: Date
+        time: Date,
+        userId: String
     }, {collection: "project.review"});
     return ReviewSchema;
-}
+};

@@ -12,4 +12,4 @@ module.exports = function (mongoose) {
         ],
     }, {collection: "project.movie"});
     return MovieSchema;
-}
+};
