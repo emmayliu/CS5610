@@ -4,9 +4,11 @@
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
+        <div class="item">
             <img class="first-slide" src="image/Cinderella-009.jpg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption">
@@ -19,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="item">
+        <div class="item active">
             <img class="second-slide" src="image/hunger.jpg" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption">
@@ -34,6 +36,32 @@
         </div>
         <div class="item">
             <img class="third-slide" src="image/third.jpg" alt="Third slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Welcome to MovieApp</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <p><a class="btn btn-lg btn-primary" role="button" data-toggle="modal"
+                          href="javascript:void(0)"  onclick="openRegisterModal();">Sign up today</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="fourth-slide" src="image/ted.jpg" alt="Fourth slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Welcome to MovieApp</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <p><a class="btn btn-lg btn-primary" role="button" data-toggle="modal"
+                          href="javascript:void(0)"  onclick="openRegisterModal();">Sign up today</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="fourth-slide" src="image/prada.jpg" alt="Fourth slide">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Welcome to MovieApp</h1>
@@ -73,19 +101,20 @@
             <img class="img-circle" src="image/find.jpeg" alt="Generic placeholder image" width="140" height="140">
             <h2>Search</h2>
             <p>Proudly provide free, fast access to millions movies</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="javascript:void(0)"  onclick="openRegisterModal();" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="image/social.jpg" alt="Generic placeholder image" width="140" height="140">
             <h2>Social</h2>
             <p>Follow people and share your comments</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="javascript:void(0)"  onclick="openRegisterModal();"
+                  role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="image/discover.jpeg" alt="Generic placeholder image" width="140" height="140">
             <h2>Discover</h2>
             <p>Certified Fresh Pick movies with high standard</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            <p><a class="btn btn-default" href="#/gallery" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
@@ -102,10 +131,8 @@
             <p class="lead">Proudly launch a free and fast access to million movies, provided by Rotten tomatoes API</p>
         </div>
         <div class="col-md-5">
-            <a href="#/search">
             <img class="featurette-image img-responsive center-block" src="image/movies.jpg"
                  alt="Generic placeholder image">
-                </a>
         </div>
     </div>
 
@@ -129,7 +156,9 @@
             <p class="lead">It's Saturday night but you don't know what to watch. Don't worry, we will take care of it</p>
         </div>
         <div class="col-md-5">
+            <a href="#/gallery">
             <img class="featurette-image img-responsive center-block" src="image/100movies.jpg" alt="Generic placeholder image">
+                </a>
         </div>
     </div>
 
@@ -140,9 +169,7 @@
 
     <!-- FOOTER -->
     <footer>
-      <p><a href="#/home" class="pull-right">Back to top</a></p>
-        <p>&copy; CS5610 WebDevelopment Yujiao(Emma), Liu &middot; <a href="#/account">Privacy</a> &middot;
-            <a href="#/profile">Terms</a></p>
+        <p>&copy; CS5610 WebDevelopment Yujiao(Emma), Liu</p>
     </footer>
 
 </div>
@@ -150,7 +177,7 @@
 <script type='text/javascript'>
     $(document).ready(function() {
         $('.carousel').carousel({
-            interval: 2000
+            interval: 1000
         })
     });
 </script>

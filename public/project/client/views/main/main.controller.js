@@ -8,10 +8,12 @@
         .module("MovieApp")
         .controller("MainController", MainController);
 
-    MainController.$inject = ["$scope"];
+    MainController.$inject = ["$scope", "$sce"];
 
     function MainController($scope, $location){
         $scope.$location = $location;
     }
 
 })();
+
+

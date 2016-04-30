@@ -81,6 +81,13 @@
                 controllerAs: "model"
             })
 
+            .when("/gallery", {
+                templateUrl: "views/gallery/gallery.html",
+                controller: "GalleryController",
+                controllerAs: "model"
+            })
+
+
             .otherwise({
                 redirectTo: "/home"
 
