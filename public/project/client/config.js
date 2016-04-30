@@ -30,6 +30,8 @@
             })
             .when("/profile", {
                 templateUrl: "views/user/profile.html",
+                controller: "ProfileController",
+                controllerAs: "model",
                 resolve: {
                     loggedin: checkLoggedin
                 }

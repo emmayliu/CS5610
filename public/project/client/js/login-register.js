@@ -55,7 +55,7 @@ function shakeModal(){
 }
 
 
-var imagesArray = ["./image/"];
+
 
 
 
